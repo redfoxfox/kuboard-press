@@ -1,29 +1,32 @@
 <template>
-  <div>
-    <div v-for="(item, key) in vssues" :key="key">
-      <Vssue v-if="item && item > 0" v-show="key === $route.path" :issueId="item" :options="options"/>
-      <div v-if="item === undefined && isLocalHost" v-show="key === $route.path" :key="key">
-        <el-button type="danger" @click="vssues[key] = ''">请创建 VssueId</el-button>
+  <div class="vssue-wrapper">
+    <LazyLoad>
+      <div v-for="(item, key) in vssues" :key="key">
+        <BaiduAutoPush></BaiduAutoPush>
+        <Vssue v-if="item && item > 0" v-show="key === $route.path" :issueId="item" :options="options"/>
+        <div v-if="item === undefined && isLocalHost" v-show="key === $route.path" :key="key">
+          <b-button variant="danger" @click="vssues[key] = ''">请创建 VssueId</b-button>
+        </div>
+        <div v-if="item === ''">
+          <b-button variant="warning" @click="refreshId = $refs.vssue[0].vssue.issue.id">请填写 vusseId <span v-if="refreshId"> - {{refreshId}}</span></b-button>
+          <Vssue ref="vssue" :title="$page.path" :options="options"/>
+        </div>
       </div>
-      <div v-if="item === ''">
-        <el-button type="warning" @click="refreshId = $refs.vssue[0].vssue.issue.id">请填写 vusseId <span v-if="refreshId"> - {{refreshId}}</span></el-button>
-        <Vssue ref="vssue" :title="$page.path" :options="options"/>
-      </div>
-    </div>
-    <script type="text/javascript">
-    (function(){
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        }
-        else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-    </script>
+      <!-- <script type="text/javascript">
+      (function(){
+          var bp = document.createElement('script');
+          var curProtocol = window.location.protocol.split(':')[0];
+          if (curProtocol === 'https') {
+              bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+          }
+          else {
+              bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+          }
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(bp, s);
+      })();
+      </script> -->
+    </LazyLoad>
   </div>
 </template>
 
@@ -47,7 +50,7 @@ export default {
     options () {
       let _this = this
       let result = {
-        platform: 'github',
+        platform: 'github-v4',
         locale: 'zh-CN',
         autoCreateIssue: true,
         admins: ['shaohq'],
@@ -73,8 +76,11 @@ export default {
 }
 </script>
 
-<style>
-.vssue-header-powered-by {
-  display: none;
-}
+<style lang="stylus">
+.vssue-header-powered-by
+  display none
+
+@media print
+  .vssue-wrapper
+    display none
 </style>

@@ -75,6 +75,13 @@ Events:          <none>
 ### Pod一直是Pending
 
 如果 Pod 一直停留在 `Pending`，意味着该 Pod 不能被调度到某一个节点上。通常，这是因为集群中缺乏足够的资源或者 ***“合适”*** 的资源。在上述 `kubectl describe...` 命令的输出中的 `Events` 字段，会有对应的事件描述为什么 Pod 不能调度到节点上。可能的原因有：
+* **资源不就绪**：创建 Pod 时，有时候需要依赖于集群中的其他对象， ConfigMap（配置字典）、PVC（存储卷声明）等，例如
+  * 可能该 Pod 需要的存储卷声明尚未与存储卷绑定，Events 信息如下所示：
+    ```
+    Type     Reason            Age        From               Message
+    ----     ------            ----       ----               -------
+    Warning  FailedScheduling  <unknown>  default-scheduler  pod has unbound immediate PersistentVolumeClaims (repated 2 times)
+    ```
 * **缺乏足够的资源**：可能集群中的CPU或内存都已经耗尽，此时，您可以尝试：
   * 删除某些 Pod
   * 调整Pod的资源请求
@@ -123,7 +130,7 @@ kubectl exec cassandra -- cat /var/log/cassandra/system.log
 
 ### Pod处于Running状态，但是不工作
 
-Pod已经处于Running状态了，但是不像您期望的那样工作，此时，很有可能是您的部署描述yaml文件（例如 Pod、Deployment、StatefulSet等）出现了问题，而创建是，kubectl 忽略了该错误。例如环境变量中某一个 Key 写错了，`command` 拼写成了 `commnd` 等。如果 `command` 拼写成了 `commnd`，您仍然能够使用该 yaml 文件创建工作负载，但是容器在运行时，却不会使用您原本期望的命令，而是执行了镜像中的 `EntryPoint`。
+Pod已经处于Running状态了，但是不像您期望的那样工作，此时，很有可能是您的部署描述yaml文件（例如 Pod、Deployment、StatefulSet等）出现了问题，而创建时，kubectl 忽略了该错误。例如环境变量中某一个 Key 写错了，`command` 拼写成了 `commnd` 等。如果 `command` 拼写成了 `commnd`，您仍然能够使用该 yaml 文件创建工作负载，但是容器在运行时，却不会使用您原本期望的命令，而是执行了镜像中的 `EntryPoint`。
 
 * 首先，在使用 `kubectl apply -f` 命令之前，可以尝试为其添加 `--validate` 选项，例如， `kubectl apply --validate -f mypod.yaml`。如果您将 `command` 拼写成 `commnd`，将看到如下错误信息：
 
@@ -168,7 +175,7 @@ web-kuboard-press   192.168.144.158:80,192.168.199.135:80   70d
 
 ### Service中没有Endpoints
 
-如果您的Service中没有Enpoints，请尝试使用 Service 的 label selector 查询一下是否存在 Pod。假设您的 Service 如下：
+如果您的Service中没有Endpoints，请尝试使用 Service 的 label selector 查询一下是否存在 Pod。假设您的 Service 如下：
 
 ``` yaml
 ...

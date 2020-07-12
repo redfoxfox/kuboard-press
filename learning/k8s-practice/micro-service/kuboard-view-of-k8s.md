@@ -1,6 +1,7 @@
 ---
 vssueId: 67
 layout: LearningLayout
+sharingTitle: 从微服务视角理解Kubernetes，并快速在K8S上落地微服务
 lessAds: true
 description: Kubernetes教程_本文描述了一个经典微服务参考架构_并且通过三个视图（集群概览、名称空间、工作负载）理解微服务与Kubernetes的映射关系。
 meta:
@@ -8,7 +9,7 @@ meta:
     content: Kubernetes教程,K8S教程,Kubernetes微服务,K8S培训,K8S教程
 ---
 
-# 从微服务视角理解Kubernetes，并快速在K8S上落地微服务
+# 从微服务视角理解Kubernetes
 
 <AdSenseTitle/>
 
@@ -187,18 +188,18 @@ Kuboard 认为，掌握这些概念并正确理解这些概念的关系之后，
 
 * 资源层监控：Prometheus + Grafana + Node Exporter 等组件，监控Kubernetes 节点的 CPU、内存、网络、磁盘等使用情况
 * 中间件层监控：Prometheus + Grafana + MySQL Exporter + Nginx Exporter + JVM Exporter 等，监控 MySQL、Nginx、JVM 等中间件的使用情况
-* 链路/APM监控：Pinpoint / SkyWorking 等监控工具，监控应用程序的性能表现
+* 链路/APM监控：Pinpoint / Skywalking 等监控工具，监控应用程序的性能表现
 
 各种监控系统各有侧重，如果想要取得比较好的监控效果，必须克服如下几个困难：
 
 * 搭建和配置监控系统
 * 定位和诊断问题时，在不同监控系统中来回切换，进入监控系统并寻找对应微服务的监控结果
 
-Kuboard 认为，应该以微服务视角的视角快速查看到该无服务在不同层面的监控结果。因此，在 Kuboard 的工作负载（微服务）查看界面中，可以直接点击进入不同监控系统对应的监控结果，无需再监控系统内反复查找。如一下截图所示：
+Kuboard 认为，应该以微服务视角快速查看到该微服务在不同层面的监控结果。因此，在 Kuboard 的工作负载（微服务）查看界面中，可以直接点击进入不同监控系统对应的监控结果，无需再监控系统内反复查找。如一下截图所示：
 
 ![Kubernetes教程：Kuboard监控](./kuboard-view-of-k8s.assets/image-20190809220543742.png)
 
-点击图中 ***Nginx 监控***、 ***容器组监控***、 ***所在节点监控*** 等按钮，可以直接打开该容器组对应的监控界面。因为篇幅的限制，此处不再展开描述，请点击 <a target="_blank" :href="`http://demo.kuboard.cn/#/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
+点击图中 ***Nginx 监控***、 ***容器组监控***、 ***所在节点监控*** 等按钮，可以直接打开该容器组对应的监控界面。因为篇幅的限制，此处不再展开描述，请点击 <a target="_blank" :href="`http://demo.kuboard.cn/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
   Kuboard 在线体验
 </a> 查看具体的监控效果。
 

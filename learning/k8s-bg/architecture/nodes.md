@@ -124,8 +124,8 @@ Events:              <none>
 
 依据你集群部署的方式（在哪个云供应商部署，或是在物理机上部署），Addesses 字段可能有所不同。
 * HostName： 在节点命令行界面上执行 `hostname` 命令所获得的值。启动 kubelet 时，可以通过参数 `--hostname-override` 覆盖
-* ExternalIP：通常是节点的外部IP（可以从集群外访问的IP地址，内网地址）
-* InternalIP：通常是从节点内部可以访问的 IP 地址（上面的例子中，此字段为空）
+* ExternalIP：通常是节点的外部IP（可以从集群外访问的内网IP地址；上面的例子中，此字段为空）
+* InternalIP：通常是从节点内部可以访问的 IP 地址
 
 ### Conditions
 
@@ -134,7 +134,7 @@ Events:              <none>
 | Node Condition    | 描述                                                         |
 | ----------------- | ------------------------------------------------------------ |
 | OutOfDisk         | 如果节点上的空白磁盘空间不够，不能够再添加新的节点时，该字段为 `True`，其他情况为 `False` |
-| Ready             | 如果节点时健康的且已经就绪可以接受新的 Pod。则节点Ready字段为 `True`。`False`表明了该节点不健康，不能够接受新的 Pod。 |
+| Ready             | 如果节点是健康的且已经就绪可以接受新的 Pod。则节点Ready字段为 `True`。`False`表明了该节点不健康，不能够接受新的 Pod。 |
 | MemoryPressure    | 如果节点内存紧张，则该字段为 `True`，否则为`False`           |
 | PIDPressure       | 如果节点上进程过多，则该字段为 `True`，否则为 `False`        |
 | DiskPressure      | 如果节点磁盘空间紧张，则该字段为 `True`，否则为 `False`      |

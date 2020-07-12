@@ -66,15 +66,11 @@
       </div>
     </div>
 
-    <div style="margin-top: 2rem;">
-      <AdSenseParagraph></AdSenseParagraph>
-    </div>
-
     <div class="intro">
-      <el-card class="intro_text" shadow="hover">
+      <b-card class="intro_text" shadow="hover">
         <p>
           <h2>Kuboard</h2>
-          <a target="_blank" :href="`http://demo.kuboard.cn/#/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
+          <a target="_blank" :href="`http://demo.kuboard.cn/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
             Kuboard 在线体验
           </a>
           <li>Kubernetes 管理界面</li>
@@ -82,10 +78,10 @@
           <li>无需手写 YAML</li>
           <li><a href="/install/install-dashboard.html">安装Kuboard</a></li>
         </p>
-      </el-card>
+      </b-card>
       <div class="intro_picture">
-        <a target="_blank" :href="`http://demo.kuboard.cn/#/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
-          <img src="./1564841972085.gif" style="max-width: 100%;" alt="Kubernetes教程：Kuboard在线演示"/>
+        <a target="_blank" :href="`http://demo.kuboard.cn/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
+          <FancyImage src="/images/preview.gif" alt="Kubernetes教程_Kuboard在线体验" title="Kuboard" description="快速在 Kubernetes 上落地微服务"></FancyImage>
         </a>
       </div>
     </div>
@@ -106,7 +102,6 @@ import NavLink from '@theme/components/NavLink.vue'
 export default {
   components: { NavLink },
   created () {
-    console.log(this.$page)
     // this.$title = 'hello---'
   },
   mounted () {
@@ -158,7 +153,7 @@ export default {
 
     actionLink () {
       return {
-        link: `http://demo.kuboard.cn/#/dashboard?k8sToken=${this.$site.themeConfig.kuboardToken}`,
+        link: `http://demo.kuboard.cn/dashboard?k8sToken=${this.$site.themeConfig.kuboardToken}`,
         text: this.data.actionText
       }
     },

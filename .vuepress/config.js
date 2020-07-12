@@ -1,12 +1,17 @@
 let dateFns = require('date-fns')
 
 module.exports = {
+  // configureWebpack: () => ({
+  //   devtool: 'source-map'
+  // }),
+  modules: ['bootstrap-vue/nuxt'],
   title: 'Kuboard官网',
   description: '一款Kubernetes_Dashboard_简化Kubernetes的学习和使用_帮助您快速落地Kubernetes_提供_Kubernetes_免费中文教程_国内安装文档',
   head: [
     // ['meta', {name: 'keywords', content: 'Kubernetes教程,Kubernetes安装,K8S教程,K8S安装,Kubernetes管理界面'}],
     ['link', { rel: 'icon', href: '/favicon.png' }],
     ['link', { rel: 'manifest', href: '/manifest.json' }],
+    // ['link', { rel: 'stylesheet', href: '/grey.css'}],
     ['meta', { name: 'theme-color', content: '#007af5' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
@@ -19,36 +24,11 @@ module.exports = {
       s.parentNode.insertBefore(hm, s);
     })();
     `],
-    ['script', {src: '/java-script-dist/swiper-4.5.0/js/swiper.min.js', async: true}],
-    // ['script', {src: "https://www.googletagmanager.com/gtag/js?id=UA-144196556-1", async: true}],
-    // ['script', {}, `
-    // window.dataLayer = window.dataLayer || [];
-    // function gtag(){dataLayer.push(arguments);}
-    // gtag('js', new Date());
 
-    // gtag('config', 'UA-144196556-1');
-    // `],
     ['script', { 'data-ad-client': "ca-pub-3313149841665250", async: true, src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"}],
-    // <script data-ad-client="ca-pub-3313149841665250" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    // ['script', { type: 'text/javascript', src: '//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js', 'data-dojo-config': 'usePlainJson: true, isDebug: false'}],
+    // ['script', { type: 'text/javascript'}, `window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us20.list-manage.com","uuid":"2273cb19eb20bb1bc5b7745a7","lid":"f1f25d6dac","uniqueMethods":true}) })`],
 
-    ['script', { type: 'text/javascript', async: true, src: "https://bot.4paradigm.com/web/assets/ics-web-sdk-js.js" }],
-    ['script', { type: 'text/javascript' }, `
-      window.onload = function() {
-        if (window.innerWidth > 1360) {
-          console.log('init-wechat')
-          IcsWebSdkJs.init('https://bot.4paradigm.com/web/chat/15516/bbc69136-e42c-4299-ba85-c57685c8417d')
-        } else {
-          console.log('窗口太小，不显示机器人')
-        }
-      }`],
-    
-    // <script type="text/javascript" src="https://bot.4paradigm.com/web/assets/ics-web-sdk-js.js"></script>
-
-    // <script type="text/javascript">
-
-    // IcsWebSdkJs.init('https://bot.4paradigm.com/web/chat/15516/bbc69136-e42c-4299-ba85-c57685c8417d')
-
-    // </script>
   ],
   markdown: {
     toc: { includeLevel: [2, 3] },
@@ -65,7 +45,7 @@ module.exports = {
     '@vuepress/back-to-top': {},
     '@vuepress/last-updated': {
       transformer: (timestamp, lang) => {
-        return dateFns.format(timestamp, 'YYYY-MM-DD HH:mm:ss')
+        return dateFns.format(timestamp, 'yyyy-MM-dd HH:mm:ss')
       }
     },
     'vuepress-plugin-code-copy': {
@@ -92,7 +72,7 @@ module.exports = {
     // },
     '@vssue/vuepress-plugin-vssue': {
       // set `platform` rather than `api`
-      platform: 'github',
+      platform: 'github-v4',
       locale: 'zh-CN',
       autoCreateIssue: false,
       admins: ['shaohq'],
@@ -143,17 +123,21 @@ module.exports = {
     }
   },
   themeConfig: {
-    incompleteRatio: 20,
+    incompleteRatio: 15,
     showMoreAds: false,
     showAds: true,
-    kuboardToken: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJvYXJkLXZpZXdlci10b2tlbi1mdGw0diIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJvYXJkLXZpZXdlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImE1YWFiMmQxLTQxMjYtNDU5Yi1hZmNhLTkyYzMwZDk0NTQzNSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTprdWJvYXJkLXZpZXdlciJ9.eYqN3FLIT6xs0-lm8AidZtaiuHeX70QTn9FhJglhEyh5dlyMU5lo8UtR-h1OY8sTSeYdYKJAS83-9SUObKQhp6XNmRgOYAfZblKUy4mvbGVQ3dn_qnzxYxt6zdGCwIY7E34eNNd9IjMF7G_Y4eJLWE7NvkSB1O8zbdn8En9rQXv_xJ9-ugCyr4CYB1lDGuZl3CIXgQ1FWcQdUBrxTT95tzcNTB0l6OUOGhRxOfw-RyIOST83GV5U0iVzxnD4sjgSaJefvCU-BmwXgpxAwRVhFyHEziXXa0CuZfBfJbmnQW308B4wocr4QDm6Nvmli1P3B6Yo9-HNF__d2hCwZEr7eg',
+    // kuboardToken: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJvYXJkLXZpZXdlci10b2tlbi1mdGw0diIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJvYXJkLXZpZXdlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImE1YWFiMmQxLTQxMjYtNDU5Yi1hZmNhLTkyYzMwZDk0NTQzNSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTprdWJvYXJkLXZpZXdlciJ9.eYqN3FLIT6xs0-lm8AidZtaiuHeX70QTn9FhJglhEyh5dlyMU5lo8UtR-h1OY8sTSeYdYKJAS83-9SUObKQhp6XNmRgOYAfZblKUy4mvbGVQ3dn_qnzxYxt6zdGCwIY7E34eNNd9IjMF7G_Y4eJLWE7NvkSB1O8zbdn8En9rQXv_xJ9-ugCyr4CYB1lDGuZl3CIXgQ1FWcQdUBrxTT95tzcNTB0l6OUOGhRxOfw-RyIOST83GV5U0iVzxnD4sjgSaJefvCU-BmwXgpxAwRVhFyHEziXXa0CuZfBfJbmnQW308B4wocr4QDm6Nvmli1P3B6Yo9-HNF__d2hCwZEr7eg',
+    kuboardToken: 'eyJhbGciOiJSUzI1NiIsImtpZCI6InZ6SzVqZFNJOXZFMmxQSkhXamNBcFY4RU9FR0RvSUR5bzJIY0NwVG1zODQifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJvYXJkLXZpZXdlci10b2tlbi0yOW40cyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJvYXJkLXZpZXdlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjQzMWMwNmYyLTNiNTAtNGEyMy1hYjM1LTkyNDQwNTQ2NzFkZCIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTprdWJvYXJkLXZpZXdlciJ9.kgwTa6t00gNC0vgr6HOvCqkDghPcW-jVDg-_K6WLy97ppb9jvaqVz-AxXzF7mJqXnNetbJw-8-x_L3ogSsDlTKmRucao96VA2tPKxel8pM04J8MU0ZmYgWhTJelibbxmQK3jwGM4x32bckOOvmtumcXdsBRN0z1SZ1iu4H0VoaswhfoFS4ZJKoe61xyqoDhQx4RLCVJh_-Uctd5RCcPLWFEk-BHqC8vUTy8QcRst6RIIozQdTqsv7Xs6bH6dHrHFS--eVVTH2orQdm8znuUFhlqFOOjmCIMzIlaUQC_SO9URIGYOs0jrk27N9KC0HvQ5dLgFmwyNJ0Gu7cYi23NP1A',
     nav: [
-      { text: '简介', link: '/overview/' },
+      // { text: '简介', link: '/overview/' },
       { text: '安装', link: '/install/install-dashboard' },
-      { text: '学习', link: '/learning/' },
+      { text: '教程', link: '/learning/' },
       { text: '使用', link: '/guide/' },
       { text: '支持', link: '/support/' },
-      // { text: '博客', link: 'https://blog.kuboard.cn/compaign' }
+      { text: '问答', link: 'https://zhik8s.com' },
+      // { text: '培训', link: 'https://kubetrain.cn/?from=kuboard', target: '_blank' },
+      // { text: '博客', link: 'http://k8s.kubetrain.cn/' },
+      // { text: '论坛', link: 'http://bbs.kuboard.cn/', target: '_blank' },
       // { text: 'DevOps', link: '/devops/' }
     ],
     displayAllHeaders: false,

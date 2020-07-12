@@ -9,6 +9,7 @@
     <meta name="description" content="Kuboard是一款免费的Kubernetes管理界面_同时该网站还提供Kubernetes安装文档_K8S_部署_入门_免费中文Kubernetes教程_以及在Kubernetes上部署SpringCloud的详细文档">
     <meta name="author" content="邵欢庆">
     <link rel="icon" href="/favicon.png">
+    <!-- <link rel="stylesheet" href="grey.css"> -->
     <link rel="stylesheet" href="landing/css/googlefont.css">
     <link rel="stylesheet" href="landing/css/font-awesome.min.css">
     <link rel="stylesheet" href="landing/css/bootstrap.min.css">
@@ -47,6 +48,110 @@
 
 <body>
 
+<style type="text/css">
+.box{
+    font-family: 'Merriweather Sans', sans-serif;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    transition: all .5s;
+    margin-bottom: 2rem;
+}
+.box:hover{ box-shadow: 3px 3px 5px #999; }
+.box:before,
+.box:after{
+    content: "";
+    background: radial-gradient(circle at 23% 70%,rgba(255,255,255,0.8),#fff 30%);
+    width: 150%;
+    height: 150%;
+    opacity: 0;
+    transform: rotate(45deg);
+    position: absolute;
+    top:-10.5%;
+    right:-150%;
+    z-index: 1;
+    transition: all 0.35s ease;
+}
+.box:after{
+    background: rgba(255,255,255,0.5);
+    width: 65%;
+    height: 65%;
+    right: auto;
+    left: -20%;
+    top: -65%;
+}
+.box:hover:before{
+    opacity: 1;
+    right: -85%;
+}
+.box:hover:after{
+    opacity: 1;
+    top: -42%;
+}
+.box img{
+    width: 100%;
+    height: auto;
+    transition: all 0.5s ease;
+}
+.box:hover img{ transform: scale(1.2); }
+.box .box-content{
+    text-align: right;
+    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: -100%;
+    z-index: 2;
+    transition: all .5s;
+}
+.box:hover .box-content{ right: 5%; }
+.box .title{
+    color: #1e272e;
+    font-size: 23px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 3px 0;
+}
+.box .post{
+    font-size: 16px;
+    text-transform: capitalize;
+    margin: 0 0 10px;
+    display: block;
+}
+.box .icon{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.box .icon li{
+    display: inline-block;
+    margin: 0 4px;
+}
+.box .icon li a{
+    color: #fff;
+    background-color: #1e272e;
+    font-size: 18px;
+    text-align: center;
+    line-height: 35px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: block;
+    transition: all 0.3s;
+}
+.box .icon li  a:hover{
+    color: #1e272e;
+    background-color: #fff;
+    border-radius: 10%;
+    box-shadow: 0 0 5px #1e272e inset;
+}
+@media only screen and (max-width:990px){
+    .box { margin: 0 0 30px; }
+}
+@media only screen and (max-width:479px){
+    .box .title{ font-size: 20px; }
+}                   
+</style>
+    
     <!-- Navigation -->
     <div id="menu_area" class="menu-area fixed-top">
         <div class="container">
@@ -61,8 +166,9 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item"> <a class="nav-link" href="/install/install-k8s.html">安装</a> </li>
-                            <li class="nav-item"> <a class="nav-link" href="/learning/">学习</a> </li>
+                            <li class="nav-item"> <a class="nav-link" href="/learning/">教程</a> </li>
                             <li class="nav-item"> <a class="nav-link" href="/guide/">使用</a> </li>
+                            <!-- <li class="nav-item"> <a class="nav-link" href="https://kubetrain.cn/?from=kuboard-homepage" target="_blank">培训</a> </li> -->
                             <li class="nav-item"> <a class="nav-link" href="/support/">支持</a> </li>
                             <!-- <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
@@ -76,7 +182,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item"> <a class="btn btn-secondary text-white btn-round btn-nav" data-toggle="modal" data-target="#signup-modal">Signup</a> </li> -->
-                            <li class="nav-item"> <a class="btn btn-primary btn-shadow  text-white btn-round btn-nav" href="/overview/">立刻开始</a> </li> 
+                            <li class="nav-item"> <a class="btn btn-primary btn-shadow  text-white btn-round btn-nav" href="/learning/">查看教程</a> </li> 
                         </ul>
                     </div>
                 </nav>
@@ -91,16 +197,19 @@
             <div class="row">
                 <div class="col-sm-6 col-md-7">
                     <div class="hero-content">
-                        <h1 class="text-primary">Kuboard - 微服务管理面板</h1>
-                        <p class="text-primary mt-3"><span style="font-weight: 500;">快速在 Kubernetes 上落地微服务。</span>Kuboard 提供：Kubernetes安装脚本，Kubernetes教程、Kubernetes管理面板、SpringCloud在Kubernetes上的实战</p>
+                        <h1 class="text-primary">快速在 Kubernetes 上落地微服务</h1>
+                        <p class="text-primary mt-3"><span style="font-weight: 500;">Kubernetes：</span> 安装、教程、管理面板、微服务实战</p>
                         <ul class="pair-btns-list">
                             <li> <a class="cbtn btn-grad-s btn-shadow btn-width"
                              target="_blank"
-                             href="http://demo.kuboard.cn/#/dashboard?k8sToken=eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJvYXJkLXZpZXdlci10b2tlbi1mdGw0diIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJvYXJkLXZpZXdlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImE1YWFiMmQxLTQxMjYtNDU5Yi1hZmNhLTkyYzMwZDk0NTQzNSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTprdWJvYXJkLXZpZXdlciJ9.eYqN3FLIT6xs0-lm8AidZtaiuHeX70QTn9FhJglhEyh5dlyMU5lo8UtR-h1OY8sTSeYdYKJAS83-9SUObKQhp6XNmRgOYAfZblKUy4mvbGVQ3dn_qnzxYxt6zdGCwIY7E34eNNd9IjMF7G_Y4eJLWE7NvkSB1O8zbdn8En9rQXv_xJ9-ugCyr4CYB1lDGuZl3CIXgQ1FWcQdUBrxTT95tzcNTB0l6OUOGhRxOfw-RyIOST83GV5U0iVzxnD4sjgSaJefvCU-BmwXgpxAwRVhFyHEziXXa0CuZfBfJbmnQW308B4wocr4QDm6Nvmli1P3B6Yo9-HNF__d2hCwZEr7eg">
+                             href="http://demo.kuboard.cn/dashboard?k8sToken=eyJhbGciOiJSUzI1NiIsImtpZCI6InZ6SzVqZFNJOXZFMmxQSkhXamNBcFY4RU9FR0RvSUR5bzJIY0NwVG1zODQifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJvYXJkLXZpZXdlci10b2tlbi0yOW40cyIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJvYXJkLXZpZXdlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjQzMWMwNmYyLTNiNTAtNGEyMy1hYjM1LTkyNDQwNTQ2NzFkZCIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTprdWJvYXJkLXZpZXdlciJ9.kgwTa6t00gNC0vgr6HOvCqkDghPcW-jVDg-_K6WLy97ppb9jvaqVz-AxXzF7mJqXnNetbJw-8-x_L3ogSsDlTKmRucao96VA2tPKxel8pM04J8MU0ZmYgWhTJelibbxmQK3jwGM4x32bckOOvmtumcXdsBRN0z1SZ1iu4H0VoaswhfoFS4ZJKoe61xyqoDhQx4RLCVJh_-Uctd5RCcPLWFEk-BHqC8vUTy8QcRst6RIIozQdTqsv7Xs6bH6dHrHFS--eVVTH2orQdm8znuUFhlqFOOjmCIMzIlaUQC_SO9URIGYOs0jrk27N9KC0HvQ5dLgFmwyNJ0Gu7cYi23NP1A">
                              在线演示</a></li>
-                            <li><a href="/overview/" class="cbtn btn-grad btn-shadow btn-width">开始使用</a></li>
+                            <li><a href="/learning/" class="cbtn btn-grad btn-shadow btn-width">查看教程</a></li>
                         </ul>
-                        <p style="margin-top: 20px;"><a aria-label="github"><iframe src="https://ghbtns.com/github-btn.html?user=eip-work&amp;repo=kuboard-press&amp;type=star&amp;count=true&amp;size=small" frameborder="0" scrolling="0" width="100px" height="20px" style="display:inline-block;vertical-align:middle;"></iframe></a></p>
+                        <p style="margin-top: 20px;">
+                            <a aria-label="github" href="https://starchart.cc/eip-work/kuboard-press" target="_blank" alt="Github Stars"><img src="https://badgen.net/github/stars/eip-work/kuboard-press?label=github&nbsp;stars"/></a>
+                            <a aria-label="github" href="https://hub.docker.com/r/eipwork/kuboard" target="_blank" alt="Docker Pulls"><img src="https://badgen.net/docker/pulls/eipwork/kuboard"/></a>
+                        </p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5">
@@ -111,124 +220,83 @@
     </header>
     <!-- /Header -->
 
-    <!-- Material Pills <Start> -->
-    <div class="bg-gray py-80">
+    <div class="bg-gray py-80" id="products">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="section-head text-center">
                         <h1 class="text-primary">快速落地 Kubernetes</h1>
-                        <p class="text-secondary">第一手 Kubernetes 实战经验，帮助您从 Kubernetes 入门到投产！</p>
+                        <p>第一手 Kubernetes 实战经验，帮助您从 Kubernetes 入门到投产！</p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
-                    <ul class="nav nav-pills material-pills nav-border-tabs nav-fill" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="cs-pills-one-tab" data-toggle="pill" href="#cs-pills-one" role="tab" aria-controls="cs-pills-one" aria-selected="true">Kubernetes<br>
-                                安装文档</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="cs-pills-two-tab" data-toggle="pill" href="#cs-pills-two" role="tab" aria-controls="cs-pills-two" aria-selected="false">Kubernetes<br>
-                                免费教程</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="cs-pills-three-tab" data-toggle="pill" href="#cs-pills-three" role="tab" aria-controls="cs-pills-three" aria-selected="false">Kubernetes<br>
-                                管理面板</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="cs-pills-five-tab" data-toggle="pill" href="#cs-pills-five" role="tab" aria-controls="cs-pills-five" aria-selected="false">Kubernetes<br>
-                                Spring Cloud 实战</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content mt-5" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="cs-pills-one" role="tabpanel" aria-labelledby="cs-pills-one-tab">
-                            <!-- Tab Content -->
-                            <div class="row">
-                                <div class="col-sm-6 col-md-4">
-                                    <div class="material-pills-text" style="margin-top: 30px;">
-                                        <h4 class="text-primary">反复验证</h4>
-                                        <p>每天有超过300名网友参考此安装文档顺利完成 Kubernetes 的安装，彻底解决初学 Kubernetes 时，因为安装问题反复踩坑的痛苦</p>
-                                        <h4 class="text-primary">持续更新</h4>
-                                        <p>自2019年8月开始，已更新60+个版本，始终与最新 Kubernetes 稳定版保持同步，并通过文档的修订，避免后来的网友碰到前人已经踩过的坑</p>
-                                        <h4 class="text-primary">远程协助</h4>
-                                        <p>安装问题，可直接在QQ群里提问，免费在线答疑，确保安装成功。碰到疑难杂症，更有群主通过 Teamviewer 免费远程协助。</p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-8">
-                                    <img src="landing/images/install-history.png" class="img-fluid" alt="" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                                </div>
-                            </div>
-                            <!-- /Tab Content -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="box" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                            <a href="/install/install-k8s.html">
+                        <img src="landing/images/install.png" alt="K8S教程_K8S培训_K8S安装手册_每天300人采纳_使用与最新K8S版本同步_免费远程协助_成功保证">
+                        <div class="box-content">
+                            <h3 class="title">K8S 安装手册</h3>
+                            <span class="post" style="color: #212529;">Kuboard for K8S</span>
+                            <ul class="icon">
+                                <!-- <li><a href="#"><i class="fa fa-search"></i></a></li> -->
+                                <li><i class="fa fa-link"></i></li>
+                            </ul>
                         </div>
-                        <div class="tab-pane fade" id="cs-pills-two" role="tabpanel" aria-labelledby="cs-pills-two-tab">
-                            <!-- Tab Content -->
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <img src="landing/images/tutorial.png" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="material-pills-text">
-                                        <h4 class="text-primary">权威资料</h4>
-                                        <p>此中文教程的主要参考依据为 Kubernetes 官网原文资料，以及 Kubernetes 实战经验。</p>
-                                        <h4 class="text-primary">在线答疑</h4>
-                                        <p>对于不明白的地方，可直接和社群网友及作者讨论，学习 Kubernetes 的同学可能不明白的问题在教程中有额外的解释</p>
-                                        <h4 class="text-primary">随时查看</h4>
-                                        <p>在线文档，自适应PC端和手机端，可以随时随地翻阅</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Tab Content -->
-                        </div>
-                        <div class="tab-pane fade" id="cs-pills-three" role="tabpanel" aria-labelledby="cs-pills-three-tab">
-                            <!-- Tab Content -->
-                            <div class="row">
-                                <div class="col-sm-6 col-md-4">
-                                    <div class="material-pills-text" style="margin-top: 0;">
-                                        <h4 class="text-primary">无需YAML</h4>
-                                        <p>无需编写复杂冗长的 YAML 文件，通过图形化管理界面轻松完成应用的部署和维护</p>
-                                        <h4 class="text-primary">场景化设计</h4>
-                                        <p>解决运维过程中的应用部署、版本更新、问题诊断、水平伸缩、配置变更等各种场景的使用</p>
-                                        <h4 class="text-primary">多环境管理</h4>
-                                        <p>从测试环境导出整个微服务架构的部署配置，在新的集群或名称空间一键导入</p>
-                                        <h4 class="text-primary">上下文监控</h4>
-                                        <p>一键安装监控套件，监控入口集成到应用程序的上下文，更快更有效地掌握集群的性能表现</p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-8">
-                                    <img src="landing/images/kuboard.png" class="img-fluid" alt="">
-                                </div>
-                            </div>
-                            <!-- /Tab Content -->
-                        </div>
-                        <div class="tab-pane fade" id="cs-pills-five" role="tabpanel" aria-labelledby="cs-pills-five-tab">
-                            <!-- Tab Content -->
-                            <div class="row">
-                                <div class="col-sm-6 ">
-                                    <div class="material-pills-text">
-                                        <h4 class="text-primary">SpringCloud部署实战</h4>
-                                        <p>
-                                            在 Kubernetes 上轻松完成 Spring Cloud 的部署
-                                        </p>
-                                        <h4 class="text-primary">DevOps集成</h4>
-                                        <p>
-                                            可与您偏好的 DevOps 工具链集成
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 ">
-                                    <img src="landing/images/springcloud.png" class="img-fluid" alt="">
-                                </div>
-                            </div>
-                            <!-- /Tab Content -->
-                        </div>
+                    </a>
                     </div>
                 </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="box" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1500">
+                            <a href="/learning/">
+                       <img src="landing/images/tutorial-p.png" alt="K8S教程_K8S培训_K8S安装手册_权威资料_第一手实战经验_自适应PC/手机">
+                        <div class="box-content">
+                            <h3 class="title">K8S 免费教程</h3>
+                            <span class="post" style="color: #212529;">Kuboard for K8S</span>
+                            <ul class="icon">
+                                <!-- <li><i class="fa fa-search"></i></li> -->
+                                <!-- <li><a href="#"></a><i class="fa fa-link"></i></a></li> -->
+                                <li><i class="fa fa-link"></i></li>
+                            </ul>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="/install/install-dashboard.html">
+                    <div class="box" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="2500">
+                        <img src="landing/images/dashboard-p.png" alt="K8S教程_K8S培训_K8S安装手册_无需编写YAML文件_纯图形化管理_多环境管理">
+                        <div class="box-content">
+                            <h3 class="title">K8S 管理面板</h3>
+                            <span class="post" style="color: #212529;">Kuboard for K8S</span>
+                            <ul class="icon">
+                                <!-- <li><i class="fa fa-search"></i></li> -->
+                                <!-- <li><a href="#"></a><i class="fa fa-link"></i></a></li> -->
+                                <li><i class="fa fa-link"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="/learning/k8s-practice/micro-service/kuboard-view-of-k8s.html">
+                    <div class="box" data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="2000">
+                        <img src="landing/images/springcloud-p.png" alt="K8S教程_K8S培训_K8S安装手册_在Kubernetes上实战Spring_Cloud_活跃的OCP社区支持">
+                        <div class="box-content">
+                            <h3 class="title">微服务实战</h3>
+                            <span class="post" style="color: #212529;">Kuboard for K8S</span>
+                            <ul class="icon">
+                                <!-- <li><i class="fa fa-search"></i></li> -->
+                                <!-- <li><a href="#"></a><i class="fa fa-link"></i></a></li> -->
+                                <li><i class="fa fa-link"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </a>
+                </div>
             </div>
-        </div>
+        </div> 
     </div>
-    <!-- Material Pills </End> -->
 
     <!-- Media Call Action <Start> -->
     <div class="bg-gray">
@@ -329,9 +397,12 @@
         <div class="box-shadow custom-witdth-box">
             <div class="floated-box">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                                <img src="landing/images/trend.png" alt="" class="img-fluid" style="border: solid 1px #eee;">
+                    <div class="row" data-aos="zoom-in-up">
+                        <div class="col-sm-12 text-center" style="max-width: 720px; margin: auto;">
+                            <!-- <img src="https://starchart.cc/eip-work/kuboard-press.svg" alt="Kubernetes教程_Kuboard_Github_Star"> -->
+                            <a href="https://starchart.cc/eip-work/kuboard-press" target="_blank">
+                                <img src="https://starchart.cc/eip-work/kuboard-press.svg" alt="" class="img-fluid box-shadow" style="border: solid 2px #f2be45; padding: 2rem; background-color: #fff; border-radius: 6px; height: 420px;">
+                            </a>
                             <!-- <a class="venobox vbox-item video-play" data-autoplay="true" data-vbtype="video" href="https://youtu.be/kubGCSj5y3k">
                                 <img src="landing/images/trend.png" alt="" class="img-fluid" style="border: solid 1px #eee;">
                                 <div class="vid-fixed-icn"><img src="landing/images/video-thumb.png" alt="" class="img-fluid"></div>
@@ -345,7 +416,7 @@
                                 <div class="slider-item">
                                     <div class="testimonial-default">
                                         <!-- <div class="testimonial-default-img"><img src="landing/images/female-75.jpg" alt="" class="center-block img-fluid"></div> -->
-                                        <h4>2019年8月3日推出 Kuboard</h4>
+                                        <h4>2019年8月3日首次发布 Kuboard</h4>
                                         <h5>获得种子用户，解决一些兼容性问题</h5>
                                     </div>
                                 </div>
@@ -356,13 +427,12 @@
                                         <h5>不断完善 Kubernetes 安装文档，推出免费 Kubernetes 教程</h5>
                                     </div>
                                 </div>
-                                <div class="slider-item">
+                                <!-- <div class="slider-item">
                                     <div class="testimonial-default">
-                                        <!-- <div class="testimonial-default-img"><img src="landing/images/29.jpg" alt="" class="center-block img-fluid"></div> -->
-                                        <h4>2019年10月20日</h4>
-                                        <h5>获得第 629 颗 Github Star</h5>
+                                        <h4>2019年10月30日</h4>
+                                        <h5>获得第 855 颗 Github Star</h5>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -447,7 +517,7 @@
                     <ul class="footer-links">
                         <li><a href="https://www.kubernetes.io" rel="nofollow" target="_blank" title="Link">Kubernetes 官网</a></li>
                         <li><a href="http://store.lameleg.com/?referrer=shaohq" target="_blank" title="Link">Sealyun 一键离线安装K8S</a></li>
-                        <li><a href="https://www.yangcs.net/?utm_source=kuboard.cn" target="_blank" title="Link">云原生实验室</a></li>
+                        <li><a href="https://fuckcloudnative.io/?utm_source=kuboard.cn" target="_blank" title="Link">云原生实验室</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-6 col-md-4 col-lg-3">
@@ -494,6 +564,12 @@
     <script src="landing/js/aos/2.1.1/aos.js"></script>
     <!-- Custom JS -->
     <script src="landing/js/main.js"></script>
+
+    <script>
+        if (location.search && (location.search.indexOf('sharing') >=0 || location.search.indexOf('from=timeline') >= 0)) {
+            document.title = 'Kuboard - 快速在 Kubernetes 上落地微服务。可一个月从K8S入门到投产'
+        }
+    </script>
 
 </body>
 

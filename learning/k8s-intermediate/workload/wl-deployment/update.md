@@ -19,13 +19,14 @@ meta:
 当且仅当 Deployment 的 Pod template（`.spec.template`）字段中的内容发生变更时（例如标签、容器的镜像被改变），Deployment 的发布更新（rollout）将被触发。Deployment 中其他字段的变化（例如修改 .spec.replicas 字段）将不会触发 Deployment 的发布更新（rollout）
 :::
 
-本文提供了两种途径对 Deployment 执行发布更新（rollout）：
-* 使用 kubectl 更新 Deployment
-* 使用 Kuboard 更新 Deployment
+> 本文提供了两种途径对 Deployment 执行发布更新（rollout）：
+> * 使用 kubectl 更新 Deployment
+> * 使用 Kuboard 更新 Deployment
 
-<el-tabs type="border-card">
+<b-card>
+<b-tabs content-class="mt-3">
+<b-tab title="使用 kubectl 更新 Deployment">
 
-<el-tab-pane label="使用 kubectl 更新 Deployment">
 
 **使用下述步骤更新您的 Deployment**
 
@@ -143,14 +144,38 @@ meta:
   * 当您更新 Deployment 时，Deployment Controller 先创建一个新的 ReplicaSet (nginx-deployment-1564180365) 并将其 scale up 到 1 个副本，然后 scale down 旧的 ReplicaSet 到 2。
   * Deployment Controller 继续 scale up 新的 ReplicaSet 并 scale down 旧的 ReplicaSet，直到最后，新旧两个 ReplicaSet，一个副本数为 3，另一个副本数为 0。
 
-</el-tab-pane>
+</b-tab>
+<b-tab title="使用 Kuboard 更新 Deployment" active>
 
-<el-tab-pane label="使用 Kuboard 更新 Deployment">
-正在撰写中
 
-</el-tab-pane>
 
-</el-tabs>
+1. 进入 Deployment 查看界面，如下图所示：
+
+   ![Kubernetes-教程](./update.assets/image-20200315111231323.png)
+
+2. 点击上图中的 ***调整镜像标签*** 按钮
+
+   将新版本字段修改为 `1.9.1`，并点击 ***确定*** 按钮，如下图所示：
+
+   ![Kubernetes-教程](./update.assets/image-20200315111509644.png)
+
+   
+
+3. 等待 Kubernetes 完成应用的滚动更新：
+
+   更新过程中，截图如下：
+
+   ![Kubernetes-教程](./update.assets/image-20200315111838761.png)
+
+   完成更新后，截图如下：
+
+   ![Kubernetes-教程](./update.assets/image-20200315113204869.png)
+
+
+
+</b-tab>
+</b-tabs>
+</b-card>
 
 ## 覆盖更新 Rollover （更新过程中再更新）
 

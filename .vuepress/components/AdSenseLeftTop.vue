@@ -1,26 +1,32 @@
 <template>
-  <div class="adsense-left-top" v-if="$themeConfig.showMoreAds" :style="$isDev ? 'background-color: grey;' : ''">
+  <div v-if="$themeConfig.showAds && false" class="adsense-page-bottom-inline" :style="$isDev ? 'background-color: grey;' : ''">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- AdsenseLeftTop -->
     <ins class="adsbygoogle"
-        style="display:block;min-width:100px;max-width:500px;width:100%;height:80px"
+        style="display:block"
+        data-ad-format="fluid"
+        data-ad-layout-key="-hh-5+1v-2l-d"
         data-ad-client="ca-pub-3313149841665250"
-        data-ad-slot="4275606991"></ins>
+        data-ad-slot="2494099929"></ins>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+    <!-- <div>
+      <a @click="$sendGaEvent('ads-nav-top:tencent-cloud', 'ads-nav-top', 'ads-nav-top')" href="https://cloud.tencent.com/act/cps/redirect?redirect=1052&cps_key=2ee6baa049659f4713ddc55a51314372&from=console" target="_blank">
+        <img style="max-width: 100%;" src="/images/ads/tencent-cloud.jpg"/>
+      </a>
+    </div> -->
   </div>
 </template>
 
 <script>
 export default {
-
 }
 </script>
 
 <style scoped>
-.adsense-left-top {
-  width: 100%;
-  /* background-color: grey; */
+.adsense-page-bottom-inline {
+  /* border: 1px solid #d7dae2; */
+  /* max-height: 160px;
+  overflow: hidden; */
 }
 </style>

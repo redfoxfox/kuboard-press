@@ -7,9 +7,11 @@ meta:
     content: Kubernetes教程,K8S教程,K8S培训,Kubernetes Job
 ---
 
-# 控制器 - Job
+# 控制器 - Job <Badge type="warning">Kuboard 正在计划中</Badge>
 
 <AdSenseTitle>
+
+> 参考文档： [Jobs - Run to Completion](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/)
 
 </AdSenseTitle>
 

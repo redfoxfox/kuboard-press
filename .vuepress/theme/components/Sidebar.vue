@@ -1,39 +1,54 @@
 <template>
   <aside class="sidebar">
+    <LazyLoad :noAdsOnSharing="false">
+      <AdSenseLeftTop/>
+    </LazyLoad>
     <!-- <NavLinks/> -->
     <div style="text-align: center; margin-top: 10px;">
-      <div class="side-nav-item" :style="activeLinkStyle('/overview/') + 'margin-left: 0;'">
-        <a href="/overview/" class="nav-link">简介</a>
-      </div>
+      <!-- <div class="side-nav-item" :style="activeLinkStyle('/overview/') + 'margin-left: 0;'">
+        <a :href="`/overview/${urlSurfix}`" class="nav-link">简介</a>
+      </div> -->
       <div class="side-nav-item" :style="activeLinkStyle('/install/')">
-        <a href="/install/install-dashboard.html" class="nav-link router-link-exact-active router-link-active">安装</a>
+        <a :href="`/install/install-dashboard.html${urlSurfix}`" class="nav-link router-link-exact-active router-link-active">安装</a>
       </div>
       <div class="side-nav-item" :style="activeLinkStyle('/learning/')">
-        <a href="/learning/" class="nav-link router-link-exact-active router-link-active">学习</a>
+        <a :href="`/learning/${urlSurfix}`" class="nav-link router-link-exact-active router-link-active">教程</a>
       </div>
       <div class="side-nav-item" :style="activeLinkStyle('/guide/')">
-        <a href="/guide/" class="nav-link">使用</a>
+        <a :href="`/guide/${urlSurfix}`" class="nav-link">使用</a>
       </div>
       <div class="side-nav-item" :style="activeLinkStyle('/support/')">
-        <a href="/support/" class="nav-link">支持</a>
+        <a :href="`/support/${urlSurfix}`" class="nav-link">支持</a>
       </div>
+      <div class="side-nav-item">
+        <a href="https://zhik8s.com" class="nav-link" target="_blank">问答</a>
+      </div>
+      <!-- <div class="side-nav-item" :style="activeLinkStyle('/training/')">
+        <a :href="`https://kubetrain.cn/?from=kuboard`" class="nav-link" target="_blank">培训</a>
+      </div> -->
+      <!-- <div class="side-nav-item">
+        <a href="http://k8s.kubetrain.cn" class="nav-link" target="_blank">博客</a>
+      </div> -->
+      <!-- <div class="side-nav-item">
+        <a href="http://bbs.kuboard.cn" class="nav-link" target="_blank">论坛</a>
+      </div> -->
     </div>
     <slot name="top"/>
     <SidebarLinks :depth="0" :items="items"/>
     <slot name="bottom"/>
     <div style="text-align: center; margin-top: 5vh;">
-      <!-- <a target="_blank" :href="`http://demo.kuboard.cn/#/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
+      <!-- <a target="_blank" :href="`http://demo.kuboard.cn/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
         <img style="width: 242px; border: 1px solid #d7dae2;" src="/images/logo-main.png" alt="Kuboard_快速在Kubernetes上落地微服务"/>
       </a> -->
 
       <p>
         <strong>
-          <a target="_blank" :href="`http://demo.kuboard.cn/#/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">在线体验</a>
+          <a target="_blank" :href="`http://demo.kuboard.cn/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">在线体验</a>
         </strong>
       </p>
       <div>
-        <a target="_blank" :href="`http://demo.kuboard.cn/#/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
-          <img :src="demo_img" style="width: 242px; height: 127px; border: 1px solid #d7dae2;" alt="Kubernetes教程：Kuboard在线体验"></img>
+        <a target="_blank" :href="`http://demo.kuboard.cn/dashboard?k8sToken=${$site.themeConfig.kuboardToken}`">
+          <FancyImage style="width: 242px;" src="/images/preview.png" alt="Kubernetes教程_Kuboard在线体验" title="Kuboard" description="快速在 Kubernetes 上落地微服务"></FancyImage>
         </a>
       </div>
       <p>
@@ -44,7 +59,7 @@
         <img src="/images/kuboard_qq.png" style="width: 120px;" alt="Kubernetes教程：QQ群在线答疑"/>
       </p> -->
     </div>
-    <el-divider >Kuboard</el-divider>
+    <!-- <el-divider >Kuboard</el-divider> -->
     <div style="height: 2rem;"></div>
   </aside>
 </template>
@@ -52,7 +67,6 @@
 <script>
 import SidebarLinks from '@theme/components/SidebarLinks.vue'
 import NavLinks from '@theme/components/NavLinks.vue'
-import demo from './1564841972085.gif'
 
 export default {
   name: 'Sidebar',
@@ -62,7 +76,12 @@ export default {
   props: ['items'],
   data () {
     return {
-      demo_img: demo
+    }
+  },
+  computed: {
+    urlSurfix () {
+      // return this.isSharing ? '' : '?sharing=true'
+      return ''
     }
   },
   methods: {
@@ -126,7 +145,7 @@ export default {
 }
 .side-nav-item {
   margin-bottom: -2px;
-  margin-left: 10px;
+  margin-left: 3px;
   display: inline-block;
   line-height: 1.4rem;
   white-space: nowrap;

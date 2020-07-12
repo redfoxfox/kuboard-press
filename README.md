@@ -10,11 +10,11 @@ Kuboard 是一款基于 Kubernetes 的微服务管理界面。目的是帮助用
 * 免费的 Kubernetes 图形化管理界面 Kuboard
 * 在 Kubernetes 上部署 Spring Cloud 的实战分享
 
-
+![集群概览页](./overview.png)
 
 ## Kubernetes安装文档
 
-* <a href="https://kuboard.cn/install/install-k8s.html">Kubernetes (K8S)v1.16.2 安装文档</a>
+* <a href="https://kuboard.cn/install/install-k8s.html">Kubernetes (K8S)v1.16.3 安装文档</a>
   * 每天超过 300 名网友参考此文档完成Kubernetes安装
   * QQ群在线答疑
 * <a href="https://kuboard.cn/install/install-kubernetes.html">Kubernetes 高可用安装文档</a>
@@ -92,6 +92,7 @@ Kubernetes教程的主要依据是：Kubernetes 官网文档，以及使用 Kubo
   * 问题诊断
     * <a href="https://kuboard.cn/learning/k8s-advanced/ts/application.html">诊断应用程序</a>
     * <a href="https://kuboard.cn/learning/k8s-advanced/ts/cluster.html">诊断集群问题</a>
+    * <a href="https://kuboard.cn/learning/k8s-advanced/ts/deployment.html">Deployment故障排除图解</a>
   * 日志
     * <a href="https://kuboard.cn/learning/k8s-advanced/logs/">日志</a>
   * 调度
@@ -102,6 +103,8 @@ Kubernetes教程的主要依据是：Kubernetes 官网文档，以及使用 Kubo
     * <a href="https://kuboard.cn/learning/k8s-advanced/policy/lr.html">Limit Range</a>
     * <a href="https://kuboard.cn/learning/k8s-advanced/policy/rq.html">Resource Quota</a>
   * 安全
+    * <a href="https://kuboard.cn/learning/k8s-advanced/sec/rbac/api.html">RBAC 授权接口</a>
+    * <a href="https://kuboard.cn/learning/k8s-advanced/sec/rbac/example.html">RBAC Example</a>
   * 监控
   * 联邦
 

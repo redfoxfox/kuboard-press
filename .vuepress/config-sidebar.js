@@ -1,4 +1,4 @@
-module.exports = {
+let sidebar = {
   '/overview/': [
     {
       title: '简介',
@@ -33,9 +33,41 @@ module.exports = {
       title: '安装 Kubernetes',
       collapsable: false,
       children: [
-        'install-docker-desktop',
+        // 'install-docker-desktop',
         ['install-k8s', '安装Kubernetes单Master节点'],
         'install-kubernetes',
+        'sealos/',
+        'install-node-port-range',
+        'docker-mirror',
+        'k8s-restart',
+      ]
+    },
+    {
+      title: '安装 Kubernetes 管理工具',
+      collapsable: false,
+      children: [
+        'install-dashboard',
+        'install-dashboard-offline',
+        {
+          title: '配置Kuboard',
+          collapsable: true,
+          children: [
+            // 'install-dashboard-upgrade',
+            'reverse-proxy',
+            'install-kuboard-layout',
+            'install-kuboard-env-2',
+          ]
+        },
+        {
+          title: 'kubectl',
+          collapsable: true,
+          children: [
+            'install-kubectl',
+            'config-kubectl',
+            'install-kubectl-sa',
+          ]
+        },
+        'install-k8s-dashboard',
       ]
     },
     {
@@ -48,24 +80,6 @@ module.exports = {
         'upgrade-k8s/calico-3.8-3.9',
       ]
     },
-    {
-      title: '管理 Kubernetes',
-      collapsable: false,
-      children: [
-        'install-dashboard',
-        'install-dashboard-upgrade',
-        'install-kubectl',
-        'config-kubectl',
-        'install-k8s-dashboard',
-      ]
-    },
-    // {
-    //   title: '常见问题',
-    //   collapsable: false,
-    //   children: [
-    //     'faq/timeout'
-    //   ]
-    // }
   ],
 
   '/learning/': [
@@ -158,7 +172,12 @@ module.exports = {
             'k8s-intermediate/workload/init-container',
             'k8s-intermediate/workload/init-config',
             'k8s-intermediate/workload/init-debug',
+            'k8s-intermediate/workload/disruption',
+            'k8s-intermediate/workload/disruption-example',
+            'k8s-intermediate/workload/pod-health.html',
+            
             'k8s-intermediate/workload/workload',
+            'k8s-intermediate/workload/wl-replicaset/',
             {
               title: '控制器 - Deployment',
               collapsable: true,
@@ -171,6 +190,7 @@ module.exports = {
                 'k8s-intermediate/workload/wl-deployment/pause',
                 'k8s-intermediate/workload/wl-deployment/status',
                 'k8s-intermediate/workload/wl-deployment/cleanup',
+                'k8s-intermediate/workload/wl-deployment/strategy',
                 'k8s-intermediate/workload/wl-deployment/canary',
               ]
             },
@@ -203,22 +223,53 @@ module.exports = {
                 'k8s-intermediate/workload/wl-job/',
                 'k8s-intermediate/workload/wl-job/spec',
                 'k8s-intermediate/workload/wl-job/failure',
+                'k8s-intermediate/workload/wl-job/cleanup',
+                'k8s-intermediate/workload/wl-job/auto-cleanup',
+                'k8s-intermediate/workload/wl-job/pattern',
+                'k8s-intermediate/workload/wl-job/usage',
+                'k8s-intermediate/workload/wl-job/when',
+                'k8s-intermediate/workload/wl-job/task_expansion',
               ]
-            }
+            },
+            {
+              title: '控制器 - CronJob',
+              collapsable: true,
+              children: [
+                'k8s-intermediate/workload/wl-cronjob/',
+                'k8s-intermediate/workload/wl-cronjob/run',
+              ]
+            },
+            'k8s-intermediate/workload/gc',
           ]
         },
         {
           title: '服务发现、负载均衡、网络',
           collapsable: true,
           children: [
-            'k8s-intermediate/service/service',
-            'k8s-intermediate/service/service-details',
-            'k8s-intermediate/service/service-types',
-            'k8s-intermediate/service/dns',
-            'k8s-intermediate/service/host-alias',
-            'k8s-intermediate/service/connecting',
+            {
+              title: 'Service',
+              collapsable: true,
+              children: [
+                'k8s-intermediate/service/service',
+                'k8s-intermediate/service/service-details',
+                'k8s-intermediate/service/service-types',
+                'k8s-intermediate/service/dns',
+                'k8s-intermediate/service/connecting',
+              ]
+            },
             'k8s-intermediate/service/ingress',
+            'k8s-intermediate/service/host-alias',
             'k8s-intermediate/service/cni',
+            {
+              title: '网络策略',
+              collapsable: true,
+              children: [
+                'k8s-intermediate/service/np',
+                'k8s-intermediate/service/np-default',
+                'k8s-intermediate/service/np-example',
+              ]
+            },
+            'k8s-intermediate/service/network'
           ]
         },
         {
@@ -241,6 +292,7 @@ module.exports = {
             'k8s-intermediate/config/config-map',
             'k8s-intermediate/config/computing-resource',
             'k8s-intermediate/config/assign-pod-node',
+            'k8s-intermediate/config/affinity',
             {
               title: '污点和容忍',
               collapsable: true,
@@ -249,6 +301,7 @@ module.exports = {
                 'k8s-intermediate/config/taints-toleration/use-case',
                 'k8s-intermediate/config/taints-toleration/taint-based-evictions',
                 'k8s-intermediate/config/taints-toleration/taint-nodes-by-condition',
+                'k8s-intermediate/config/taints-toleration/kuboard-toleration',
               ]
             },
             {
@@ -299,6 +352,7 @@ module.exports = {
           children: [
             'k8s-advanced/ts/application',
             'k8s-advanced/ts/cluster',
+            'k8s-advanced/ts/deployment'
           ]
         },
         {
@@ -356,6 +410,51 @@ module.exports = {
             // },
           ]
         },
+        'k8s-advanced/gc',
+        {
+          title: '安全',
+          collapsable: true,
+          children: [
+            {
+              title: '用户认证',
+              collapsable: true,
+              children: [
+                'k8s-advanced/sec/authenticate/',
+                'k8s-advanced/sec/sa-admin',
+                'k8s-advanced/sec/authenticate/install',
+              ]
+            }, {
+              title: '用户授权',
+              collapsable: true,
+              children: [
+                'k8s-advanced/sec/kuboard',
+                'k8s-advanced/sec/rbac/list-namespace.html',
+                'k8s-advanced/sec/rbac/logs.html',
+                'k8s-advanced/sec/rbac/api',
+                'k8s-advanced/sec/rbac/default',
+                'k8s-advanced/sec/rbac/escalation',
+                'k8s-advanced/sec/rbac/cmd',
+                'k8s-advanced/sec/rbac/sa',
+                'k8s-advanced/sec/rbac/permissive',
+                'k8s-advanced/sec/rbac/example',
+              ]
+            },
+          ]
+        },
+        {
+          title: '监控',
+          collapsable: true,
+          children: [
+            'k8s-advanced/observe/kube-prometheus.html',
+          ]
+        },
+        {
+          title: '扩展Kubernetes',
+          collapsable: true,
+          children: [
+            'k8s-advanced/extend/aggregation',
+          ]
+        },
       ]
     },
     {
@@ -363,10 +462,19 @@ module.exports = {
       collapsable: true,
       children: [
         {
+          title: '练习',
+          collapsable: true,
+          children: [
+            'k8s-practice/access/port-forward',
+            'k8s-practice/admin/list-images',
+          ]
+        },
+        {
           title: '概述',
           collapsable: false,
           children: [
-            'k8s-practice/micro-service/kuboard-view-of-k8s'
+            'k8s-practice/micro-service/kuboard-view-of-k8s',
+            'k8s-practice/micro-service/design-pattern'
           ]
         },
         {
@@ -419,29 +527,38 @@ module.exports = {
           ]
         },
       ]
-    }
+    },
+    {
+      title: 'Kubernetes 常见问题',
+      collapsable: true,
+      children: [
+        'faq/ping-service',
+        'faq/request-limit',
+        'faq/image-pull-backoff'
+      ]
+    },
   ],
 
   '/guide/': [
     {
       title: '概述',
-      collapsable: false,
+      collapsable: true,
       children: [
         ['', '概述']
       ]
     },
     {
       title: 'Example',
-      collapsable: false,
+      collapsable: true,
       children: [
         'example/busybox',
         'example/import',
-        'example/monitor',
+        'example/monitor-v2',
       ]
     },
     {
       title: '集群管理',
-      collapsable: false,
+      collapsable: true,
       children: [
         'cluster/computing',
         'cluster/storage',
@@ -450,7 +567,7 @@ module.exports = {
     },
     {
       title: '应用管理',
-      collapsable: false,
+      collapsable: true,
       children: [
         'namespace/workload',
         'namespace/secrets',
@@ -462,11 +579,39 @@ module.exports = {
     },
     {
       title: '问题诊断',
-      collapsable: false,
+      collapsable: true,
       children: [
         'diagonize/events',
         'diagonize/logs',
-        'diagonize/port-forward'
+        'diagonize/port-forward',
+        'diagonize/skills',
+      ]
+    },
+    {
+      title: 'Kuboard Proxy',
+      collapsable: false,
+      children: [
+        ['proxy/', 'Kuboard Proxy 介绍'],
+        ['proxy/authorization', '授权用户访问 Kuboard Proxy'],
+        ['proxy/rebase', '为何极少部分网页显示不正常-Rebase'],
+        ['proxy/auth-proxy', '使用Auth-Proxy实现单点登录']
+      ]
+    },
+    {
+      title: 'CI/CD集成',
+      collapsable: false,
+      children: [
+        'cicd/'
+      ]
+    },
+    {
+      title: '套件',
+      collapsable: false,
+      children: [
+        'addon/',
+        'addon/customize',
+        'addon/api',
+        'addon/repository'
       ]
     },
     {
@@ -474,7 +619,16 @@ module.exports = {
       collapsable: false,
       children: [
         'monitor/',
-        'monitor/apis'
+      ]
+    },
+  ],
+
+  '/t/': [
+    {
+      title: 'CKA每日一题',
+      collapsable: false,
+      children: [
+        'cka/daily',
       ]
     },
   ],
@@ -491,9 +645,21 @@ module.exports = {
       title: '更新说明',
       collapsable: false,
       children: [
+        'change-log/v2.0.x',
         'change-log/v1.0.x',
+        'change-log/upgrade-1-2',
+        'change-log/upgrade-2-from-beta',
+        'known-issue',
       ]
     }
   ],
 
 }
+
+if (process.env.NODE_ENV === 'development') {
+  let guideV2 = require('./config-sidebar-guide.js')
+  
+  sidebar = Object.assign(sidebar, guideV2)
+}
+
+module.exports = sidebar

@@ -47,13 +47,14 @@ kubernetes 安装有多种选择，本文档描述的集群安装具备如下特
 * 三个 master 组成主节点集群，通过内网 loader balancer 实现负载均衡；至少需要三个 master 节点才可组成高可用集群，否则会出现 ***脑裂*** 现象
 * 多个 worker 组成工作节点集群，通过外网 loader balancer 实现负载均衡
 
-  [领取腾讯云最高2860元代金券](https://cloud.tencent.com/act/cps/redirect?redirect=1040&cps_key=2ee6baa049659f4713ddc55a51314372&from=console)
+  [腾讯云11.11爆款1核2G云服务器首购88元，免费领9888元代金券，百款云产品一折起](https://cloud.tencent.com/act/cps/redirect?redirect=1050&cps_key=2ee6baa049659f4713ddc55a51314372&from=console)
 
-  [腾讯云限时1折秒杀](https://cloud.tencent.com/act/cps/redirect?redirect=1044&cps_key=2ee6baa049659f4713ddc55a51314372&from=console)
+  <!-- [腾讯云限时1折秒杀](https://cloud.tencent.com/act/cps/redirect?redirect=1044&cps_key=2ee6baa049659f4713ddc55a51314372&from=console) -->
 
-  [领取阿里云最高2000元红包](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=obezo3pg)
+  [阿里云双十一，All in Cloud，低至一折](https://www.aliyun.com/1111/2019/home?userCode=obezo3pg)
 
-  [阿里云服务器限时2折](https://www.aliyun.com/acts/limit-buy?userCode=obezo3pg)
+  <!-- [阿里云服务器限时2折](https://www.aliyun.com/acts/limit-buy?userCode=obezo3pg) -->
+
 
 安装后的拓扑图如下：<span v-on:click="$sendGaEvent('下载拓扑图-kubernetes', '下载拓扑图-kubernetes', 'Download-install-kubernetes.html')"> <a :href="$withBase('/kuboard.rp')" download="www.kuboard.cn.rp" >下载拓扑图源文件</a> </span> <font color="#999">使用Axure RP 9.0可打开该文件</font>
 
@@ -62,8 +63,8 @@ kubernetes 安装有多种选择，本文档描述的集群安装具备如下特
 * **在线答疑** 
 
   <Qq></Qq> 也可以扫描二维码加群
-  <p>
-    <img src="/images/kuboard_qq.png" alt="Kubernetes教程：QQ群在线答疑"/>
+  <p style="max-width: 160px;">
+    <img src="/images/kuboard_qq.png" style="padding: 10px;" alt="Kubernetes教程：QQ群在线答疑"/>
   </p>
 
 <!-- </div>
@@ -86,10 +87,10 @@ hostname
 | ----------- | --------------------------------------- | ----------------------------------- |
 | 7.7         | <span style="font-size: 24px;">😄</span> | 已验证                              |
 | 7.6         | <span style="font-size: 24px;">😄</span> | 已验证                              |
-| 7.5         | <span style="font-size: 24px;">😄</span> | 已验证                              |
-| 7.4         | <span style="font-size: 24px;">🤔</span> | 待验证                              |
-| 7.3         | <span style="font-size: 24px;">🤔</span> | 待验证                              |
-| 7.2         | <span style="font-size: 24px;">😞</span> | 已证实会出现 kubelet 无法启动的问题 |
+| 7.5         | <span style="font-size: 24px;">😞</span> | 已证实会出现 kubelet 无法启动的问题    |
+| 7.4         | <span style="font-size: 24px;">😞</span> | 同上                              |
+| 7.3         | <span style="font-size: 24px;">😞</span> | 同上                              |
+| 7.2         | <span style="font-size: 24px;">😞</span> | 同上                              |
 
 ::: tip 修改 hostname
 如果您需要修改 hostname，可执行如下指令：
@@ -103,9 +104,30 @@ echo "127.0.0.1   $(hostname)" >> /etc/hosts
 ```
 :::
 
-<!-- </div>
+## 检查网络
 
-<div slot="step2"> -->
+在所有节点执行命令
+``` {2,11,13}
+[root@demo-master-a-1 ~]$ ip route show
+default via 172.21.0.1 dev eth0 
+169.254.0.0/16 dev eth0 scope link metric 1002 
+172.21.0.0/20 dev eth0 proto kernel scope link src 172.21.0.12 
+
+[root@demo-master-a-1 ~]$ ip address
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:16:3e:12:a4:1b brd ff:ff:ff:ff:ff:ff
+    inet 172.17.216.80/20 brd 172.17.223.255 scope global dynamic eth0
+       valid_lft 305741654sec preferred_lft 305741654sec
+```
+::: tip kubelet使用的IP地址
+* `ip route show` 命令中，可以知道机器的默认网卡，通常是 `eth0`，如 ***default via 172.21.0.23 dev <font color="blue" weight="500">eth0</font>***
+* `ip address` 命令中，可显示默认网卡的 IP 地址，Kubernetes 将使用此 IP 地址与集群内的其他节点通信，如 `172.17.216.80`
+* 所有节点上 Kubernetes 所使用的 IP 地址必须可以互通（无需 NAT 映射、无安全组或防火墙隔离）
+:::
 
 ## 安装 docker / kubelet
 
@@ -118,8 +140,9 @@ echo "127.0.0.1   $(hostname)" >> /etc/hosts
 - nfs-utils
 - kubectl / kubeadm / kubelet
 
-<el-tabs type="border-card">
-<el-tab-pane label="快速安装">
+<b-card>
+<b-tabs content-class="mt-3">
+  <b-tab title="快速安装" active>
 
 ``` sh
 # 在 master 节点和 worker 节点都要执行
@@ -128,8 +151,8 @@ curl -sSL https://kuboard.cn/install-script/v1.16.2/install_kubelet.sh | sh
 
 ```
 
-</el-tab-pane>
-<el-tab-pane label="手动安装">
+  </b-tab>
+  <b-tab title="手动安装">
 
 手动执行以下代码，效果与快速安装完全相同。
 
@@ -139,8 +162,9 @@ curl -sSL https://kuboard.cn/install-script/v1.16.2/install_kubelet.sh | sh
 如果此时执行 `service status kubelet` 命令，将得到 kubelet 启动失败的错误提示，请忽略此错误，因为必须完成后续步骤中 kubeadm init 的操作，kubelet 才能正常启动
 :::
 
-</el-tab-pane>
-</el-tabs>
+  </b-tab>
+</b-tabs>
+</b-card>
 
 </InstallEnvCheck>
 
@@ -156,7 +180,7 @@ curl -sSL https://kuboard.cn/install-script/v1.16.2/install_kubelet.sh | sh
 
 监听端口：6443 / TCP
 
-后端资源组：包含 demo-master-a-1, demo-master-b-1, demo-master-b-2
+后端资源组：包含 demo-master-a-1, demo-master-a-2, demo-master-a-3
 
 后端端口：6443
 
@@ -164,7 +188,11 @@ curl -sSL https://kuboard.cn/install-script/v1.16.2/install_kubelet.sh | sh
 
 假设完成创建以后，Load Balancer的 ip 地址为 x.x.x.x
 
-> 根据每个人实际的情况不同，实现 LoadBalancer 的方式不一样，本文不详细阐述如何搭建 LoadBalancer，请读者自行解决
+> 根据每个人实际的情况不同，实现 LoadBalancer 的方式不一样，本文不详细阐述如何搭建 LoadBalancer，请读者自行解决，可以考虑的选择有：
+> * nginx
+> * haproxy
+> * keepalived
+> * 云供应商提供的负载均衡产品
 
 ### 初始化第一个master节点
 
@@ -179,8 +207,9 @@ curl -sSL https://kuboard.cn/install-script/v1.16.2/install_kubelet.sh | sh
 * **POD_SUBNET** 所使用的网段不能与 ***master节点/worker节点*** 所在的网段重叠。该字段的取值为一个 <a href="/glossary/cidr.html" target="_blank">CIDR</a> 值，如果您对 CIDR 这个概念还不熟悉，请不要修改这个字段的取值 10.100.0.1/16
 :::
 
-<el-tabs type="border-card">
-<el-tab-pane label="快速初始化">
+<b-card>
+<b-tabs content-class="mt-3">
+  <b-tab title="快速初始化" active>
 
 在第一个 master 节点 demo-master-a-1 上执行
 
@@ -194,8 +223,8 @@ echo "127.0.0.1    ${APISERVER_NAME}" >> /etc/hosts
 curl -sSL https://kuboard.cn/install-script/v1.16.2/init_master.sh | sh
 ```
 
-</el-tab-pane>
-<el-tab-pane label="手工初始化">
+  </b-tab>
+  <b-tab title="手动初始化">
 
 ``` sh
 # 只在第一个 master 节点执行
@@ -208,8 +237,9 @@ echo "127.0.0.1    ${APISERVER_NAME}" >> /etc/hosts
 
 <<< @/.vuepress/public/install-script/v1.16.2/init_master.sh
 
-</el-tab-pane>
-</el-tabs>
+  </b-tab>
+</b-tabs>
+</b-card>
 
 ***执行结果***
 
@@ -273,8 +303,9 @@ kubectl get nodes
 > * 添加第二、三个Master节点
 > * 初始化 master 节点的 token 有效时间为 2 小时
 
-<el-tabs type="border-card">
-<el-tab-pane label="和第一个Master节点一起初始化">
+<b-card>
+<b-tabs content-class="mt-3">
+  <b-tab title="和第一个Master节点一起初始化" active>
 
 初始化第一个 master 节点时的输出内容中，第15、16、17行就是用来初始化第二、三个 master 节点的命令，如下所示：<font color="red">此时请不要执行该命令</font>
 
@@ -284,8 +315,8 @@ kubectl get nodes
     --control-plane --certificate-key 41a741533a038a936759aff43b5680f0e8c41375614a873ea49fde8944614dd6
 ```
 
-</el-tab-pane>
-<el-tab-pane label="第一个Master节点初始化2个小时后再初始化">
+  </b-tab>
+  <b-tab title="第一个Master节点初始化2个小时后再初始化">
 
 **获得 certificate key**
 
@@ -331,8 +362,9 @@ kubeadm join apiserver.demo:6443 --token bl80xo.hfewon9l5jlpmjft     --discovery
 --control-plane --certificate-key <font color="red">70eb87e62f052d2d5de759969d5b42f372d0ad798f98df38f7fe73efdf63a13c</font>
 </div>
 
-</el-tab-pane>
-</el-tabs>
+  </b-tab>
+</b-tabs>
+</b-card>
 
 **初始化第二、三个 master 节点**
 
@@ -351,6 +383,34 @@ kubeadm join apiserver.demo:6443 --token ejwx62.vqwog6il5p83uk7y \
 --control-plane --certificate-key 70eb87e62f052d2d5de759969d5b42f372d0ad798f98df38f7fe73efdf63a13c
 ```
 
+::: tip 常见问题
+如果一直停留在 pre-flight 状态，请在第二、三个节点上执行命令检查：
+``` sh
+curl -ik https://apiserver.demo:6443/version
+```
+输出结果应该如下所示
+```
+HTTP/1.1 200 OK
+Cache-Control: no-cache, private
+Content-Type: application/json
+Date: Wed, 30 Oct 2019 08:13:39 GMT
+Content-Length: 263
+
+{
+  "major": "1",
+  "minor": "16",
+  "gitVersion": "v1.16.2",
+  "gitCommit": "2bd9643cee5b3b3a5ecbd3af49d09018f0773c77",
+  "gitTreeState": "clean",
+  "buildDate": "2019-09-18T14:27:17Z",
+  "goVersion": "go1.12.9",
+  "compiler": "gc",
+  "platform": "linux/amd64"
+}
+```
+否则，请您检查一下您的 Loadbalancer 是否设置正确
+:::
+
 **检查 master 初始化结果**
 
 ``` sh
@@ -367,9 +427,9 @@ kubectl get nodes
 
 ### 获得 join命令参数
 
-
-<el-tabs type="border-card">
-<el-tab-pane label="和第一个Master节点一起初始化">
+<b-card>
+<b-tabs content-class="mt-3">
+  <b-tab title="和第一个Master节点一起初始化" active>
 
 初始化第一个 master 节点时的输出内容中，第25、26行就是用来初始化 worker 节点的命令，如下所示：<font color="red">此时请不要执行该命令</font>
 
@@ -378,8 +438,8 @@ kubectl get nodes
     --discovery-token-ca-cert-hash sha256:959569cbaaf0cf3fad744f8bd8b798ea9e11eb1e568c15825355879cf4cdc5d6
 ```
 
-</el-tab-pane>
-<el-tab-pane label="第一个Master节点初始化2个小时后再初始化">
+  </b-tab>
+  <b-tab title="第一个Master节点初始化2个小时后再初始化">
 
 **在第一个 master 节点 demo-master-a-1 节点执行**
 
@@ -394,8 +454,9 @@ kubeadm token create --print-join-command
 kubeadm join apiserver.demo:6443 --token mpfjma.4vjjg8flqihor4vt     --discovery-token-ca-cert-hash sha256:6f7a8e40a810323672de5eee6f4d19aa2dbdb38411845a1bf5dd63485c43d303
 ```
 
-</el-tab-pane>
-</el-tabs>
+  </b-tab>
+</b-tabs>
+</b-card>
 
 ::: tip 有效时间
 该 token 的有效时间为 2 个小时，2小时内，您可以使用此 token 初始化任意数量的 worker 节点。
@@ -454,17 +515,18 @@ kubectl delete node demo-worker-x-x
 
 ## 安装 Ingress Controller
 
-> Ingress官方文档：https://kubernetes.io/docs/concepts/services-networking/ingress/
+<!-- > Ingress官方文档：https://kubernetes.io/docs/concepts/services-networking/ingress/
 >
 > Ingress Controllers官网介绍：https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
 >
 > 本文中使用如下部署方式：https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#using-a-self-provisioned-edge
 >
-> kubernetes支持多种Ingress Controllers (traefic / Kong / Istio / Nginx 等)，本文推荐使用 https://github.com/nginxinc/kubernetes-ingress
+> kubernetes支持多种Ingress Controllers (traefic / Kong / Istio / Nginx 等)，本文推荐使用 https://github.com/nginxinc/kubernetes-ingress -->
+kubernetes支持多种Ingress Controllers (traefic / Kong / Istio / Nginx 等)，本文推荐使用 https://github.com/nginxinc/kubernetes-ingress
 
-
-<el-tabs type="border-card">
-<el-tab-pane label="快速安装">
+<b-card>
+<b-tabs content-class="mt-3">
+  <b-tab title="快速安装" active>
 
 **在 master 节点上执行**
 
@@ -473,13 +535,14 @@ kubectl delete node demo-worker-x-x
 kubectl apply -f https://kuboard.cn/install-script/v1.16.2/nginx-ingress.yaml
 ```
 
-</el-tab-pane>
-<el-tab-pane label="YAML文件">
+  </b-tab>
+  <b-tab title="YAML文件">
 
 <<< @/.vuepress/public/install-script/v1.16.2/nginx-ingress.yaml
 
-</el-tab-pane>
-</el-tabs>
+  </b-tab>
+</b-tabs>
+</b-card>
 
 ::: warning
 如果您打算将 Kubernetes 用于生产环境，请参考此文档 [Installing Ingress Controller](https://github.com/nginxinc/kubernetes-ingress/blob/v1.5.3/docs/installation.md)，完善 Ingress 的配置

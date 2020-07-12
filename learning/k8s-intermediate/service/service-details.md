@@ -37,7 +37,7 @@ spec:
 
 上述 YAML 文件可用来创建一个 Service：
 * 名字为 `my-service`
-* 目标端口未 TCP 9376
+* 目标端口为 TCP 9376
 * 选取所有包含标签 app=MyApp 的 Pod
 
 关于 Service，您还需要了解：
@@ -262,7 +262,7 @@ kubelet 查找有效的 Service，并针对每一个 Service，向其所在节�
 
 例如，Service `redis-master` 暴露 TCP 端口 6379，其 Cluster IP 为 10.0.0.11，对应的环境变量如下所示：
 
-``` s
+```
 REDIS_MASTER_SERVICE_HOST=10.0.0.11
 REDIS_MASTER_SERVICE_PORT=6379
 REDIS_MASTER_PORT=tcp://10.0.0.11:6379

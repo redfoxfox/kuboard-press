@@ -23,7 +23,7 @@ meta:
 
 > Kubernetes 更新多副本的 Deployment 的版本时，会逐步的创建新版本的 Pod，逐步的停止旧版本的 Pod，以便使应用一直处于可用状态。这个过程中，Service 能够监视 Pod 的状态，将流量始终转发到可用的 Pod 上。
 
-在上一个模块中，我们学习了将应用程序 Scale Up（扩容）为多个实例，这是执行更新而不影响应用程序可用性的前提（如果只有个实例那还玩啥）。默认情况下，**Rolling Update 滚动更新** 过程中，Kubernetes 逐个使用新版本 Pod 替换旧版本 Pod（最大不可用 Pod 数为 1、最大新建 Pod 数也为 1）。这两个参数可以配置为数字或百分比。在Kubernetes 中，更新是版本化的，任何部署更新都可以恢复为以前的（稳定）版本。
+在上一个模块中，我们学习了将应用程序 Scale Up（扩容）为多个实例，这是执行更新而不影响应用程序可用性的前提（如果只有 1 个实例那还玩啥）。默认情况下，**Rolling Update 滚动更新** 过程中，Kubernetes 逐个使用新版本 Pod 替换旧版本 Pod（最大不可用 Pod 数为 1、最大新建 Pod 数也为 1）。这两个参数可以配置为数字或百分比。在Kubernetes 中，更新是版本化的，任何部署更新都可以恢复为以前的（稳定）版本。
 
 ## 滚动更新概述
 
@@ -55,8 +55,9 @@ meta:
 
 <SharingBlock>
 
-<el-tabs type="border-card">
-<el-tab-pane label="使用kubectl">
+<b-card>
+<b-tabs content-class="mt-3">
+<b-tab title="使用kubectl" active>
 
 **修改 nginx-deployment.yaml 文件**
 
@@ -99,8 +100,8 @@ kubectl apply -f nginx-deployment.yaml
 watch kubectl get pods -l app=nginx
 ```
 
-</el-tab-pane>
-<el-tab-pane label="使用Kuboard">
+</b-tab>
+<b-tab title="使用Kuboard">
 
 * **进入 default 名称空间**
 
@@ -124,8 +125,9 @@ watch kubectl get pods -l app=nginx
 
 ![Kubernetes教程：执行滚动更新-过程](./update.assets/image-20190822214503847.png)
 
-</el-tab-pane>
-</el-tabs>
+</b-tab>
+</b-tabs>
+</b-card>
 
 
 ~~呱唧呱唧，恭喜您，即将成为k8s的大神的您，已经迈进了您k8s的最重要的一步了--入门，那么接下来请再接再厉，继续征服k8s的高峰！！！

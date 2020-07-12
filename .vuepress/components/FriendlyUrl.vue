@@ -9,7 +9,7 @@
     </div>
     <div style="margin-top: 20px;">
     </div>
-    <div class="friend-section">
+    <div class="friend-section" v-show="!$isSharing">
       友情链接：
       <div v-for="item in urls" class="friend-a">
         <a target="_blank" :href="item.url + ( item.url.indexOf('?') > 0 ?  '&utm_source=kuboard.cn' : '?utm_source=kuboard.cn')"
@@ -33,8 +33,7 @@ export default {
     return {
       urls: [
         {name: 'sealos官网', url: 'http://store.lameleg.com?referrer=shaohq', icon: 'https://hugo-picture.oss-cn-beijing.aliyuncs.com/blog/2019-08-27-044824.jpg'},
-        {name: '云原生实验室', url: 'https://www.yangcs.net/', icon: 'https://hugo-picture.oss-cn-beijing.aliyuncs.com/favicon-32x32.png'},
-        {name: '阳明的博客', url: 'https://www.qikqiak.com/', icon: 'https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/favicon.png'},
+        {name: '云原生实验室', url: 'https://fuckcloudnative.io/', icon: 'https://hugo-picture.oss-cn-beijing.aliyuncs.com/favicon-32x32.png'},
       ]
     }
   }

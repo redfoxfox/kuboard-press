@@ -1,31 +1,48 @@
 ---
 vssueId: 9
 layout: LearningLayout
-sharingTitle: 这里有一份免费在线答疑的 K8S 教程
+sharingTitle: 这里有一份最新的 K8S 教程，还可以免费在线答疑
 sidebarDepth: 0
 description: 本教程的主要依据是：Kubernetes官网文档，以及使用Kubernetes落地SpringCloud微服务并投产的实战经验，在线答疑。适用人群_ Kubernetes 初学者_学习过 Kubernetes，但在投产过程中仍有诸多疑虑和困惑的技术爱好者
 meta:
   - name: keywords
-    content: K8S教程,K8S 教程,K8S培训,Kubernetes培训
+    content: K8S教程,K8S 教程,K8S培训,Kubernetes培训,K8S搭建,kuberntes搭建
 ---
 
 # Kubernetes教程
 
-<AdSenseTitle>
+<AdSenseTitle/>
+
+<div class="row">
+  <!-- <div class="col-md-4 col-sm-12" style="margin-top: 1rem;">
+    <a href="#kubernetes免费教程">
+      <FancyImage src="/images/courses/free.png" title="免费教程" description="kubernetes.io权威资料，kuboard翻译" alt="K8S培训_免费教程" type="SlideLeft2Right"/>
+    </a>
+  </div>
+  <div class="col-md-4 col-sm-12" style="margin-top: 1rem;">
+    <a href="https://ke.qq.com/course/477593?flowToken=1016936" target="_blank">
+      <FancyImage src="/images/courses/kubeadm.png" title="12元直播课" description="安装详解 / 集群规划" alt="K8S培训" type="SlideLeft2Right"/>
+    </a>
+  </div>
+   <div class="col-md-4 col-sm-12" style="margin-top: 1rem;">
+    <a href="https://kubetrain.cn/?from=learning" target="_blank">
+      <FancyImage src="/images/courses/intermediate.png" title="K8S高薪培训" description="不满意无条件退费" alt="K8S培训_高薪培训" type="Cross"/>
+    </a>
+  </div> -->
+  <!--<div class="col-md-3 col-sm-12" style="margin-top: 1rem;">
+    <a href="https://kubetrain.cn/advanced.html?from=learning" target="_blank">
+      <FancyImage src="/images/courses/advanced.png" title="K8S高级班" description="360讲师授课" alt="K8S培训_高薪培训" type="Rectangle"/>
+    </a>
+  </div> -->
+</div>
+
+## Kubernetes免费教程
 
 本教程的主要依据是：Kubernetes 官网文档，以及使用 Kubernetes 落地 Spring Cloud 微服务并投产的实战经验。适用人群：
 * Kubernetes 初学者
 * 学习过 Kubernetes，但在投产过程中仍有诸多疑虑和困惑的技术爱好者
 
-</AdSenseTitle>
-
-
-
-<!-- <div style="background-color: #0063dc;">
-  <div style="max-width: 363px; margin: auto;">
-    <img src="/images/logo-main.png" style="background-color: #0063dc; max-width: 100%;" alt="Kubernetes管理界面：Kuboard Logo"/>
-  </div>
-</div> -->
+根据实际反馈，有很大比例的用户参考 kuboard.cn 网站后，能够在 1 个月内完成 Kubernetes 上的微服务落地工作。
 
 ## **Kubernetes 介绍**
 
@@ -40,6 +57,8 @@ meta:
   * [创建 busybox](/guide/example/busybox.html) （10分钟）
     * 快速在 Kubernetes 集群中安装一个部署，并与当中的容器组交互。
 
+<Course courseId="477593" />
+
 
 ## **Kubernetes 入门**
   * [0. 学习Kubernetes基础知识](/learning/k8s-basics/kubernetes-basics.html) (10分钟)
@@ -49,6 +68,9 @@ meta:
     * [4. 伸缩应用程序](/learning/k8s-basics/scale.html) (10分钟)
     * [5. 执行滚动更新](/learning/k8s-basics/update.html) (10分钟)
   * [6. 复习Kubernetes核心概念](/learning/k8s-basics/k8s-core-concepts.html) (10分钟)
+
+<div data-aos="fade-up">
+
   ::: tip 学习路径建议
   * 入门教程是经典。推荐初学者学习入门教程 2 - 3 遍，甚至更多。
   * 完成入门教程之后，建议首先阅读的文章内容是：
@@ -59,9 +81,39 @@ meta:
     * [使用私有 registry 中的 docker 镜像](/learning/k8s-intermediate/private-registry.html)
     * [Service 连接应用程序](/learning/k8s-intermediate/service/connecting.html)
     * [Ingress 通过互联网访问您的应用](/learning/k8s-intermediate/service/ingress.html)
+    * [Deployment故障排除](/learning/k8s-advanced/ts/deployment.html)
     * [数据卷 Volume](/learning/k8s-intermediate/persistent/volume.html)
-  * 下一步，可按教程章节顺序对 Kubernetes 各种概念进行深入理解
+    * [使用KuboardProxy](/guide/proxy/)
+    * [使用port-forward访问集群中的应用程序](/learning/k8s-practice/access/port-forward.html)
+    * [Kubernetes网络模型](/learning/k8s-intermediate/service/network.html)
+    * [容器应用的设计原则、模式和反模式](/learning/k8s-practice/micro-service/design-pattern.html)
+    * [尝试部署完整的微服务](/learning/k8s-practice/ocp/)
+  * 完善工具配置
+    * [掌握快速部署高可用Kubernetes集群的窍门](https://github.com/fanux/sealos)
+    * [自定义Kuboard名称空间布局](/install/install-kuboard-layout.html)
+    * [创建ServiceAccount并授权其访问指定的名称空间](/learning/k8s-advanced/sec/kuboard.html)
+    * [实现Kubernetes与GitLab/GitHub的单点登录](/learning/k8s-advanced/sec/authenticate/install.html)
+    * [了解日志聚合](/learning/k8s-advanced/logs/)
+    * [了解Kubernetes的监控](/guide/example/monitor-v2.html)
+    * [免费获得Kuboard授权](/support/)
+    * 自动伸缩
+  * 按教程章节顺序对 Kubernetes 各种概念进行深入理解
+  * CI/CD 工具链
+    * 私有 Docker 镜像仓库
+    * CI/CD pipeline
+    * [CI/CD集成](/guide/cicd/)
+  * 投产准备
+    * 集群规划
+  * 长期维护
+    * 可观察性
+    * 升级
+    * kubeadm 更新证书
+    * 增加、删除节点
+    * 备份恢复 etcd
+    * 故障排除
   :::
+
+</div>
 
 ## **Kubernetes 进阶**
   * 架构
@@ -85,11 +137,15 @@ meta:
     * [容器组 - 生命周期](/learning/k8s-intermediate/workload/pod-lifecycle.html)
     * [容器组 - 初始化容器](/learning/k8s-intermediate/workload/init-container.html)
     * [控制器 - 概述](/learning/k8s-intermediate/workload/workload.html)
+    * [控制器 - ReplicaSet](/learning/k8s-intermediate/workload/wl-replicaset/)
+    * [控制器 - ReplicationController](/learning/k8s-intermediate/workload/wl-replication-con/)
     * [控制器 - Deployment](/learning/k8s-intermediate/workload/wl-deployment/)
     * [控制器 - StatefulSet](/learning/k8s-intermediate/workload/wl-statefulset/)
     * [控制器 - DaemonSet](/learning/k8s-intermediate/workload/wl-daemonset/)
+    * [控制器 - 垃圾回收](/learning/k8s-intermediate/workload/gc)
+    * [控制器 - TTL](/learning/k8s-intermediate/workload/wl-ttl/)
     * [控制器 - Job](/learning/k8s-intermediate/workload/wl-job/)
-    * [控制器 - CronJob](/learning/k8s-intermediate/workload/wl-cronjob/) <Badge text="正在撰写" type="warn"/>
+    * [控制器 - CronJob](/learning/k8s-intermediate/workload/wl-cronjob/)
   * 服务发现、负载均衡、网络
     * [Service 概述](/learning/k8s-intermediate/service/service.html)
     * [Service 详细描述](/learning/k8s-intermediate/service/service-details.html)
@@ -128,7 +184,13 @@ meta:
     * [Limit Range](/learning/k8s-advanced/policy/lr.html)
     * [Resource Quota](/learning/k8s-advanced/policy/rq.html)
   * 安全
+    * [用户认证概述](/learning/k8s-advanced/sec/authenticate/)
+    * [使用GitLab/GitHub等账号登录Kubernetes](/learning/k8s-advanced/sec/authenticate/install.html)
+    * [RBAC授权](/learning/k8s-advanced/sec/rbac/api.html)
+
+    <!-- <Course courseId="484058" /> -->
   * 监控
+    * [kube-prometheus](/learning/k8s-advanced/observe/kube-prometheus.html)
   * 联邦
 
 ## **Kubernetes 实战**
@@ -140,7 +202,7 @@ meta:
 * [概述](/learning/k8s-practice/spring-cloud/)
 * [导入 example 微服务应用](/guide/example/import.html) （15分钟）
   * 导入一个完整的 example 微服务应用，体验 Spring Cloud 在 Kubernetes 上的部署过程。
-* [在微服务上下文中监控 example](example/monitor.html) <Badge text="alpha" type="warn"/>
+* [在微服务上下文中监控 example](/guide/example/monitor-v2.html) 
   * 根据微服务上下文查看监控结果
 
 在 Kubernetes 上部署 Spring Cloud 微服务：(Open Capacity Platform)
@@ -163,3 +225,6 @@ meta:
   * [导入部署配置](/learning/k8s-practice/ocp/import.html)
 
 Kuboard提供免费K8S教程、K8S培训
+
+
+<!-- <LearningPlan/> -->

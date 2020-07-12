@@ -17,9 +17,13 @@ meta:
 
 以我们在 [创建Deployment](./create.html) 中创建的 Deployment 为例。
 
-<el-tabs type="border-card">
+> 本文提供了两种途径对 Deployment 执行暂停和继续操作：
+> * 使用 kubectl 暂停和继续 Deployment
+> * 使用 Kuboard 暂停和继续 Deployment
 
-<el-tab-pane label="使用 kubectl 暂停 Deployment">
+<b-card>
+<b-tabs content-class="mt-3">
+<b-tab title="使用 kubectl 暂停 Deployment">
 
 * 执行命令 `kubectl get deployment`，查看 Deployment 信息，输出结果如下所示：
 
@@ -102,14 +106,30 @@ meta:
   您不能回滚（rollback）一个已暂停的 Deployment，除非您继续（resume）该 Deployment。
   :::
 
-</el-tab-pane>
+</b-tab>
+<b-tab title="使用 Kuboard 暂停 Deployment" active>
 
-<el-tab-pane label="使用 Kuboard 暂停 Deployment">
-正在撰写中
 
-</el-tab-pane>
 
-</el-tabs>
+* 在 Deployment 详情页中点击 ***处理状态*** 的开关，可以暂停 Deployment 处理，修改后如下图所示：
+
+  ![Kubernetes-教程-暂停Deployment](./pause.assets/image-20200315161430483.png)
+
+* 点击 ***调整镜像标签*** 按钮，设置新版本为 `1.15.8`，如下图所示：
+
+  保存后，可以看到 Deployment 中已经将容器镜像版本修改为 `nginx:1.15.8`，然而，Deployment 控制器此时并未执行滚动更新的过程，因为 Deployment 的处理已经被暂停。
+
+  ![Kubernetes-教程-暂停Deployment](./pause.assets/image-20200315161646155.png)
+
+* 点击 ***处理状态*** 的开关，将其设定为 `已继续`，Deployment 将立刻开始执行滚动更新，最终结果如下图所示：
+
+  ![Kubernetes-教程-暂停Deployment](./pause.assets/image-20200315162152085.png)
+
+
+
+</b-tab>
+</b-tabs>
+</b-card>
 
 
 [返回 Deployment](./#deployment-概述)

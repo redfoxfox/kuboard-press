@@ -7,7 +7,7 @@ meta:
     content: Kubernetes Dashboard安装,Kuboard安装,K8S Dashboard安装
 ---
 
-# 安装Kuboard
+# 安装 Kuboard v2
 
 <AdSenseTitle/>
 
@@ -19,6 +19,13 @@ Kuboard 是 Kubernetes 的一款图形化管理界面。
   <InstallDashboardPreview/>
 </div>
 
+## Kuboard v3 版本介绍
+
+* Kuboard v3.0 已经正式发布，相较于 Kuboard v2.0.x， Kuboard v3 最大的特点是支持多 Kubernetes 集群管理。如果您是 Kuboard 的新用户，建议您选择 [Kuboard v3](./v3/install.html)。
+
+* Kuboard v2.0.x 将进入长期维护阶段，如果碰到问题，用户仍然可以在群里找群主解决问题。如果您计划升级到 Kuboard v3，请参考 [从 v2.0.x 升级到 v3.0.x](./v3/install.html#从-v2.0.x-升级到-v3.0.x)
+
+> 如果您希望继续安装 Kuboard v2.0.x，请继续阅读本文后面的内容。
 ## 前提
 
 安装 Kuboard 时，假设您已经有一个 Kubernetes 集群，以下任何形式安装的集群都可以：
@@ -39,6 +46,8 @@ Kuboard 是 Kubernetes 的一款图形化管理界面。
 
 | Kubernetes 版本 | Kuboard 版本   | 兼容性 | 说明                                                         |
 | --------------- | -------------- | ------ | ------------------------------------------------------------ |
+| v1.20           | v2.0.x          | <span style="font-size: 24px;">😄</span>      | 已验证                            |
+| v1.19           | v2.0.x          | <span style="font-size: 24px;">😄</span>      | 已验证                            |
 | v1.18           | v1.0.x， v2.0.x | <span style="font-size: 24px;">😄</span>      | 已验证                            |
 | v1.17           | v1.0.x， v2.0.x | <span style="font-size: 24px;">😄</span>      | 已验证                            |
 | v1.16           | v1.0.x， v2.0.x | <span style="font-size: 24px;">😄</span>      | 已验证                            |
@@ -64,7 +73,7 @@ Kuboard 是 Kubernetes 的一款图形化管理界面。
 
 ``` sh
 kubectl apply -f https://kuboard.cn/install-script/kuboard.yaml
-kubectl apply -f https://addons.kuboard.cn/metrics-server/0.3.6/metrics-server.yaml
+kubectl apply -f https://addons.kuboard.cn/metrics-server/0.3.7/metrics-server.yaml
 ```
 
 </b-tab>
@@ -72,7 +81,7 @@ kubectl apply -f https://addons.kuboard.cn/metrics-server/0.3.6/metrics-server.y
 
 ``` sh
 kubectl apply -f https://kuboard.cn/install-script/kuboard-beta.yaml
-kubectl apply -f https://addons.kuboard.cn/metrics-server/0.3.6/metrics-server.yaml
+kubectl apply -f https://addons.kuboard.cn/metrics-server/0.3.7/metrics-server.yaml
 ```
 
 </b-tab>
@@ -141,7 +150,7 @@ kuboard-54c9c4f6cb-6lf88   1/1     Running       0          45s
 
 ``` sh
 kubectl delete -f https://kuboard.cn/install-script/kuboard.yaml
-kubectl delete -f https://addons.kuboard.cn/metrics-server/0.3.6/metrics-server.yaml
+kubectl delete -f https://addons.kuboard.cn/metrics-server/0.3.7/metrics-server.yaml
 ```
 
 </b-tab>
@@ -149,7 +158,7 @@ kubectl delete -f https://addons.kuboard.cn/metrics-server/0.3.6/metrics-server.
 
 ``` sh
 kubectl delete -f https://kuboard.cn/install-script/kuboard-beta.yaml
-kubectl delete -f https://addons.kuboard.cn/metrics-server/0.3.6/metrics-server.yaml
+kubectl delete -f https://addons.kuboard.cn/metrics-server/0.3.7/metrics-server.yaml
 ```
 
 </b-tab>
@@ -158,7 +167,7 @@ kubectl delete -f https://addons.kuboard.cn/metrics-server/0.3.6/metrics-server.
 
 ``` sh
 kubectl delete -f https://kuboard.cn/install-script/kuboard-arm.yaml
-kubectl delete -f https://addons.kuboard.cn/metrics-server/0.3.6/metrics-server-arm.yaml
+kubectl delete -f https://addons.kuboard.cn/metrics-server/0.3.7/metrics-server-arm.yaml
 ```
 
 </b-tab>

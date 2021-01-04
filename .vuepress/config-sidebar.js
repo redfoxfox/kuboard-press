@@ -46,10 +46,32 @@ let sidebar = {
       title: '安装 Kubernetes 管理工具',
       collapsable: false,
       children: [
+        {
+          title: '安装 Kuboard v3',
+          collapsable: true,
+          children: [
+            'v3/install',
+            'v3/install-built-in',
+            'v3/install-gitlab',
+            'v3/install-github',
+            'v3/install-ldap',
+            'v3/install-in-k8s'
+          ]
+        },
+        {
+          title: '配置 Kuboard v3',
+          collapsable: true,
+          children: [
+            'v3/auth-user-sso',
+            'v3/proxy',
+            'v3/tls',
+            'v3-upgrade',
+          ]
+        },
         'install-dashboard',
         'install-dashboard-offline',
         {
-          title: '配置Kuboard',
+          title: '配置 Kuboard v2',
           collapsable: true,
           children: [
             // 'install-dashboard-upgrade',
@@ -280,6 +302,8 @@ let sidebar = {
             'k8s-intermediate/persistent/volume-mount-point.html',
             'k8s-intermediate/persistent/pv',
             'k8s-intermediate/persistent/storage-class',
+            'k8s-intermediate/persistent/ceph/k8s-config',
+            'k8s-intermediate/persistent/ceph/rook-config',
             'k8s-intermediate/persistent/nfs',
             'k8s-intermediate/persistent/limits',
           ]
@@ -363,6 +387,7 @@ let sidebar = {
             'k8s-advanced/logs/basic',
             'k8s-advanced/logs/node',
             'k8s-advanced/logs/cluster',
+            'k8s-advanced/logs/loki-addon'
           ]
         },
         {
@@ -412,6 +437,14 @@ let sidebar = {
         },
         'k8s-advanced/gc',
         {
+          title: '自动伸缩',
+          collapsable: true,
+          children: [
+            'k8s-advanced/hpa/hpa',
+            'k8s-advanced/hpa/walkthrough',
+          ]
+        },
+        {
           title: '安全',
           collapsable: true,
           children: [
@@ -422,12 +455,14 @@ let sidebar = {
                 'k8s-advanced/sec/authenticate/',
                 'k8s-advanced/sec/sa-admin',
                 'k8s-advanced/sec/authenticate/install',
+                'k8s-advanced/sec/authenticate/ldap',
               ]
             }, {
               title: '用户授权',
               collapsable: true,
               children: [
                 'k8s-advanced/sec/kuboard',
+                'k8s-advanced/sec/rbac/user-namespace.html',
                 'k8s-advanced/sec/rbac/list-namespace.html',
                 'k8s-advanced/sec/rbac/logs.html',
                 'k8s-advanced/sec/rbac/api',
@@ -645,10 +680,12 @@ let sidebar = {
       title: '更新说明',
       collapsable: false,
       children: [
+        'change-log/v3.0.x',
         'change-log/v2.0.x',
         'change-log/v1.0.x',
+        'change-log/upgrade-2-3',
         'change-log/upgrade-1-2',
-        'change-log/upgrade-2-from-beta',
+        // 'change-log/upgrade-2-from-beta',
         'known-issue',
       ]
     }
